@@ -71,9 +71,9 @@ public class SellingPostService {
                 updateSellingPostRequest.getStatus()
         );
 
-        SellingPost updatedSellingpost = sellingPostRepository.save(sellingPost);
+        SellingPost updatedSellingPost = sellingPostRepository.save(sellingPost);
 
-        return SellingPostResponseDto.from(updatedSellingpost);
+        return SellingPostResponseDto.from(updatedSellingPost);
     }
 
 

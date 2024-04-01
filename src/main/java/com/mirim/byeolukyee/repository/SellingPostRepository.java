@@ -1,6 +1,6 @@
 package com.mirim.byeolukyee.repository;
 
-import com.mirim.byeolukyee.entity.SellingPost;
+import com.mirim.byeolukyee.domain.SellingPost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

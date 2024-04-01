@@ -3,14 +3,13 @@ package com.mirim.byeolukyee.service;
 import com.mirim.byeolukyee.dto.sellingpost.AddSellingPostRequest;
 import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponseDto;
 import com.mirim.byeolukyee.dto.sellingpost.UpdateSellingPostRequest;
-import com.mirim.byeolukyee.entity.SellingPost;
-import com.mirim.byeolukyee.entity.User;
+import com.mirim.byeolukyee.domain.SellingPost;
+import com.mirim.byeolukyee.domain.User;
 import com.mirim.byeolukyee.exception.PostNotFoundException;
 import com.mirim.byeolukyee.exception.UserNotFoundException;
 import com.mirim.byeolukyee.repository.SellingPostRepository;
 import com.mirim.byeolukyee.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

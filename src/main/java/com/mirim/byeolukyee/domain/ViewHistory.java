@@ -1,4 +1,4 @@
-package com.mirim.byeolukyee.entity;
+package com.mirim.byeolukyee.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.mirim.byeolukyee.entity;
+package com.mirim.byeolukyee.domain;
 
 import com.mirim.byeolukyee.constant.SellingPostStatus;
 import jakarta.persistence.*;

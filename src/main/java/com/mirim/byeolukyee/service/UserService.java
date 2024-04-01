@@ -3,7 +3,7 @@ package com.mirim.byeolukyee.service;
 import com.mirim.byeolukyee.dto.user.AddUserRequestDto;
 import com.mirim.byeolukyee.dto.user.SignInUserRequestDto;
 import com.mirim.byeolukyee.dto.user.UserResponseDto;
-import com.mirim.byeolukyee.entity.User;
+import com.mirim.byeolukyee.domain.User;
 import com.mirim.byeolukyee.exception.DuplicateEmailException;
 import com.mirim.byeolukyee.exception.IncorrectPasswordException;
 import com.mirim.byeolukyee.exception.UserNotFoundException;

@@ -3,7 +3,7 @@ package com.mirim.byeolukyee.dto.sellingpost;
 import com.mirim.byeolukyee.constant.SellingPostStatus;
 import com.mirim.byeolukyee.dto.post.PostResponseDto;
 import com.mirim.byeolukyee.dto.user.UserResponseDto;
-import com.mirim.byeolukyee.entity.SellingPost;
+import com.mirim.byeolukyee.domain.SellingPost;
 import lombok.Builder;
 import lombok.Getter;
 

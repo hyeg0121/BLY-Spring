@@ -1,10 +1,9 @@
 package com.mirim.byeolukyee.dto.buyingpost;
 
 import com.mirim.byeolukyee.constant.BuyingPostStatus;
-import com.mirim.byeolukyee.constant.SellingPostStatus;
 import com.mirim.byeolukyee.dto.post.PostResponseDto;
 import com.mirim.byeolukyee.dto.user.UserResponseDto;
-import com.mirim.byeolukyee.entity.BuyingPost;
+import com.mirim.byeolukyee.domain.BuyingPost;
 import lombok.Builder;
 import lombok.Getter;
 

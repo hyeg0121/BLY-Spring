@@ -4,7 +4,7 @@ import com.mirim.byeolukyee.constant.SellingCommentStatus;
 import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponseDto;
 import com.mirim.byeolukyee.dto.post.PostResponseDto;
 import com.mirim.byeolukyee.dto.user.UserResponseDto;
-import com.mirim.byeolukyee.entity.SellingComment;
+import com.mirim.byeolukyee.domain.SellingComment;
 import lombok.Builder;
 import lombok.Getter;
 

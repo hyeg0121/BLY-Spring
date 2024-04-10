@@ -1,4 +1,4 @@
-package com.mirim.byeolukyee.entity;
+package com.mirim.byeolukyee.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mirim.byeolukyee.constant.BuyingPostStatus;

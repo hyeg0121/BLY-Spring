@@ -7,18 +7,18 @@ import lombok.Getter;
 @Getter
 public class PostImageResponseDto {
     private final Long id;
-    private final String filePath;
+    private final String uploadedFilename;
 
     @Builder
-    public PostImageResponseDto(Long id, String filePath) {
+    public PostImageResponseDto(Long id, String uploadedFilename) {
         this.id = id;
-        this.filePath = filePath;
+        this.uploadedFilename = uploadedFilename;
     }
 
     public static PostImageResponseDto from(PostImage postImage) {
         return PostImageResponseDto.builder()
                 .id(postImage.getId())
-                .filePath(postImage.getFilePath())
+                .uploadedFilename(postImage.getUploadedFilename())
                 .build();
     }
 }

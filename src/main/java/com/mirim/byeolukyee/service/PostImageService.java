@@ -3,10 +3,13 @@ package com.mirim.byeolukyee.service;
 import com.mirim.byeolukyee.domain.Post;
 import com.mirim.byeolukyee.domain.PostImage;
 import com.mirim.byeolukyee.dto.postimage.PostImageResponseDto;
+import com.mirim.byeolukyee.exception.ImageNotFoundException;
 import com.mirim.byeolukyee.exception.PostNotFoundException;
 import com.mirim.byeolukyee.repository.SellingPostRepository;
 import com.mirim.byeolukyee.repository.PostImageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +75,20 @@ public class PostImageService {
 
 
         return postImageResponseDtos;
+    }
+
+    public Resource getImageResource(String uploadedFileName) throws IOException {
+        // 이미지 파일의 경로를 가져옴
+        Path imagePath = Paths.get("uploaded", uploadedFileName);
+
+        // 해당 경로에 파일이 존재하는지 확인
+        if (!Files.exists(imagePath) || Files.isDirectory(imagePath)) {
+            // 파일이 존재하지 않거나 디렉토리인 경우 Exception 발생
+            throw ImageNotFoundException.EXCEPTION;
+        }
+
+        // 이미지 파일을 Resource 객체로 읽어와 반환
+        return new FileSystemResource(imagePath.toFile());
     }
 
 }

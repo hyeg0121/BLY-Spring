@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/post-images")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class PostImageController {
     private final PostImageService postImageService;
 

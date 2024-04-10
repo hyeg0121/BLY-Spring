@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/buying-posts")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class BuyingPostController {
 
     private final BuyingPostService buyingPostService;

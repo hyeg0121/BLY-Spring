@@ -23,6 +23,7 @@ public class SecurityConfig {
             auth.requestMatchers("/**").permitAll();
             auth.anyRequest().authenticated();
         })
+                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .logout(AbstractHttpConfigurer::disable);

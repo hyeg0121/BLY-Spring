@@ -3,6 +3,7 @@ package com.mirim.byeolukyee.controller;
 import com.mirim.byeolukyee.dto.buyingpost.AddBuyingPostRequestDto;
 import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponseDto;
 import com.mirim.byeolukyee.dto.buyingpost.UpdateBuyingPostRequestDto;
+import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
 import com.mirim.byeolukyee.service.BuyingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -47,9 +48,14 @@ public class BuyingPostController {
     }
 
     @PutMapping("/bid")
-    public ResponseEntity<String> makeBidAndWinAuction(@RequestParam("buyingPostId") Long buyingPostId,
-                                                       @RequestParam("sellingCommentId") Long sellingCommentId) {
+    public ResponseEntity<Void> makeBidAndWinAuction(@RequestParam("buyingPostId") Long buyingPostId,
+                                                        @RequestParam("sellingCommentId") Long sellingCommentId) {
         buyingPostService.makeBidAndWinAuction(buyingPostId, sellingCommentId);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("업데이트 되었습니다.");
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/selling-comments")
+    public ResponseEntity<List<SellingCommentResponseDto>> findSellingComments(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(buyingPostService.findSellingComments(id));
     }
 }

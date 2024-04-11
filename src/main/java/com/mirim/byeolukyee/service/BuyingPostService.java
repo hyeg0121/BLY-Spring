@@ -8,6 +8,7 @@ import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponseDto;
 import com.mirim.byeolukyee.dto.buyingpost.UpdateBuyingPostRequestDto;
 import com.mirim.byeolukyee.domain.BuyingPost;
 import com.mirim.byeolukyee.domain.User;
+import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
 import com.mirim.byeolukyee.exception.PostNotFoundException;
 import com.mirim.byeolukyee.exception.UserNotFoundException;
 import com.mirim.byeolukyee.repository.BuyingPostRepository;
@@ -94,5 +95,15 @@ public class BuyingPostService {
 
         buyingPostRepository.save(buyingPost);
         sellingCommentRepository.save(sellingComment);
+    }
+
+
+    public List<SellingCommentResponseDto> findSellingComments(Long id) {
+        BuyingPost buyingPost = buyingPostRepository.findById(id)
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+
+        return buyingPost.getReferencingItems().stream()
+                .map(SellingCommentResponseDto::from)
+                .collect(Collectors.toList());
     }
 }

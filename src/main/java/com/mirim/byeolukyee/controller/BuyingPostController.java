@@ -45,4 +45,11 @@ public class BuyingPostController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(buyingPostService.updateBuyingPost(id, updateBuyingPostRequestDto));
     }
+
+    @PutMapping("/bid")
+    public ResponseEntity<String> makeBidAndWinAuction(@RequestParam("buyingPostId") Long buyingPostId,
+                                                       @RequestParam("sellingCommentId") Long sellingCommentId) {
+        buyingPostService.makeBidAndWinAuction(buyingPostId, sellingCommentId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("업데이트 되었습니다.");
+    }
 }

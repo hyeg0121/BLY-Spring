@@ -12,14 +12,12 @@ import java.time.LocalDateTime;
 
 @Getter
 public class SellingCommentResponseDto extends PostResponseDto {
-    private final BuyingPostResponseDto referenceItem;
     private final SellingCommentStatus status;
     private final String krStatus;
 
     @Builder
     public SellingCommentResponseDto(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponseDto user, String title, String description, Integer price, String location, BuyingPostResponseDto referenceItem, SellingCommentStatus status) {
         super(isDeleted, createdAt, updatedAt, id, user, title, description, price, location);
-        this.referenceItem = referenceItem;
         this.status = status;
         this.krStatus = status.getKrName();
     }

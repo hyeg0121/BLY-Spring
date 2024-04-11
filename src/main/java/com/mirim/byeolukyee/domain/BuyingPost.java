@@ -31,4 +31,7 @@ public class BuyingPost extends Post {
         this.status = status;
     }
 
+    public void setStatus(BuyingPostStatus status) {
+        this.status = status;
+    }
 }

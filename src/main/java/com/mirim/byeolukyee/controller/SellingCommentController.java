@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/selling-comments")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class SellingCommentController {
 
     private final SellingCommentService sellingCommentService;

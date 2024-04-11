@@ -27,4 +27,8 @@ public class SellingComment extends Post {
         super.updatePost(title, description, price, location);
         this.status = status;
     }
+
+    public void setStatus(SellingCommentStatus status) {
+        this.status = status;
+    }
 }

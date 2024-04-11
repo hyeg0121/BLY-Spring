@@ -3,6 +3,7 @@ package com.mirim.byeolukyee.controller;
 import com.mirim.byeolukyee.dto.buyingpost.AddBuyingPostRequestDto;
 import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponseDto;
 import com.mirim.byeolukyee.dto.buyingpost.UpdateBuyingPostRequestDto;
+import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
 import com.mirim.byeolukyee.service.BuyingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/buying-posts")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class BuyingPostController {
 
     private final BuyingPostService buyingPostService;
@@ -43,5 +45,17 @@ public class BuyingPostController {
     ) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(buyingPostService.updateBuyingPost(id, updateBuyingPostRequestDto));
+    }
+
+    @PutMapping("/bid")
+    public ResponseEntity<Void> makeBidAndWinAuction(@RequestParam("buyingPostId") Long buyingPostId,
+                                                        @RequestParam("sellingCommentId") Long sellingCommentId) {
+        buyingPostService.makeBidAndWinAuction(buyingPostId, sellingCommentId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/selling-comments")
+    public ResponseEntity<List<SellingCommentResponseDto>> findSellingComments(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(buyingPostService.findSellingComments(id));
     }
 }

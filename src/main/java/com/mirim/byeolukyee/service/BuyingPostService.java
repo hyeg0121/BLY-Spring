@@ -106,4 +106,11 @@ public class BuyingPostService {
                 .map(SellingCommentResponseDto::from)
                 .collect(Collectors.toList());
     }
+
+    public void deleteBuyingPost(Long id) {
+        BuyingPost buyingPost = buyingPostRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        buyingPost.setIsDeleted(true);
+        buyingPostRepository.save(buyingPost);
+    }
 }

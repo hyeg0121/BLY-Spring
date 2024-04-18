@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,13 @@ public class SellingPostResponseDto extends PostResponseDto {
     }
 
     public static SellingPostResponseDto from(SellingPost sellingPost) {
+
+        List<PostImageResponseDto> postImageList = new ArrayList<>();
+
+        if (sellingPost.getPostImageList() != null)
+            postImageList = sellingPost.getPostImageList().stream().map(PostImageResponseDto::from).collect(Collectors.toList());
+
+
         return SellingPostResponseDto.builder()
                 .isDeleted(sellingPost.getIsDeleted())
                 .createdAt(sellingPost.getCreatedAt())
@@ -39,7 +47,7 @@ public class SellingPostResponseDto extends PostResponseDto {
                 .price(sellingPost.getPrice())
                 .location(sellingPost.getLocation())
                 .status(sellingPost.getStatus())
-                .images(sellingPost.getPostImageList().stream().map(PostImageResponseDto::from).collect(Collectors.toList()))
+                .images(postImageList)
                 .build();
     }
 

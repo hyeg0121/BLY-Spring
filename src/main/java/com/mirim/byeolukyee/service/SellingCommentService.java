@@ -83,4 +83,11 @@ public class SellingCommentService {
 
         return SellingCommentResponseDto.from(updatedSellingComment);
     }
+
+    public void deleteSellingComment(Long id) {
+        SellingComment sellingComment = sellingCommentRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        sellingComment.setIsDeleted(true);
+        sellingCommentRepository.save(sellingComment);
+    }
 }

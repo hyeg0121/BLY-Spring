@@ -78,4 +78,11 @@ public class UserService {
         if (userRepository.existsUserByEmail(email)) throw DuplicateEmailException.EXCEPTION;
     }
 
+    public void deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        user.setIsDeleted(true);
+        userRepository.save(user);
+    }
+
 }

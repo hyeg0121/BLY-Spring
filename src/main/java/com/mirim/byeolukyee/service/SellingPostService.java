@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.service;
 
+import com.mirim.byeolukyee.domain.Post;
 import com.mirim.byeolukyee.dto.sellingpost.AddSellingPostRequest;
 import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponseDto;
 import com.mirim.byeolukyee.dto.sellingpost.UpdateSellingPostRequest;
@@ -75,5 +76,10 @@ public class SellingPostService {
         return SellingPostResponseDto.from(updatedSellingPost);
     }
 
-
+    public void deleteSellingPost(Long id) {
+        SellingPost sellingPost = sellingPostRepository.findById(id)
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        sellingPost.setIsDeleted(true);
+        sellingPostRepository.save(sellingPost);
+    }
 }

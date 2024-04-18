@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.controller;
 
+import com.mirim.byeolukyee.domain.SellingComment;
 import com.mirim.byeolukyee.dto.sellingcomment.AddSellingCommentRequestDto;
 import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
 import com.mirim.byeolukyee.dto.sellingcomment.UpdateSellingCommentRequestDto;
@@ -44,6 +45,12 @@ public class SellingCommentController {
     ) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingCommentService.updateSellingComment(id, updateSellingCommentRequestDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+        sellingCommentService.deleteSellingComment(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

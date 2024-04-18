@@ -45,4 +45,10 @@ public class SellingPostController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingPostService.updateSellingPost(id, updateSellingPostRequest));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+        sellingPostService.deleteSellingPost(id);
+        return ResponseEntity.noContent().build();
+    }
 }

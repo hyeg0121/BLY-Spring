@@ -40,4 +40,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.signIn(signInUserRequestDto));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 }

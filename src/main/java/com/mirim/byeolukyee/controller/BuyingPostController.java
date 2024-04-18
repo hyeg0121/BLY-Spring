@@ -58,4 +58,10 @@ public class BuyingPostController {
     public ResponseEntity<List<SellingCommentResponseDto>> findSellingComments(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(buyingPostService.findSellingComments(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+        buyingPostService.deleteBuyingPost(id);
+        return ResponseEntity.noContent().build();
+    }
 }

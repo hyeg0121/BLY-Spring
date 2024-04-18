@@ -40,4 +40,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(ErrorResponse.of(ErrorCode.IMAGE_NOT_FOUND));
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException e) {
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+                .body(ErrorResponse.of(e.getErrorCode()));
+    }
 }

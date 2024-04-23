@@ -19,7 +19,7 @@ public class RefreshToken {
     @Column(nullable = false)
     private String refreshToken;
 
-   private RefreshToken(Long userId, String refreshToken) {
+   public RefreshToken(Long userId, String refreshToken) {
        this.userId = userId;
        this.refreshToken = refreshToken;
    }

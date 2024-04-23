@@ -22,9 +22,13 @@ repositories {
 }
 
 dependencies {
+    // starter
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // validation
     implementation 'javax.validation:validation-api:2.0.1.Final'
 
     compileOnly 'org.projectlombok:lombok'

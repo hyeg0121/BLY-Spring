@@ -1,6 +1,5 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.domain.SellingComment;
 import com.mirim.byeolukyee.dto.sellingcomment.AddSellingCommentRequestDto;
 import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
 import com.mirim.byeolukyee.dto.sellingcomment.UpdateSellingCommentRequestDto;
@@ -15,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/selling-comments")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class SellingCommentController {
 
     private final SellingCommentService sellingCommentService;

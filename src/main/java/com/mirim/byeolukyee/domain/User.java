@@ -32,4 +32,11 @@ public class User extends BaseEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> items = new ArrayList<>();  // 아이템 리스트
+
+    public User update(String name) {
+        this.name = name;
+        this.studentId = studentId;
+
+        return this;
+    }
 }

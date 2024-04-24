@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.SerializationUtils;
 
+import java.io.Serializable;
 import java.util.Base64;
 
 public class CookieUtil {
@@ -34,7 +35,7 @@ public class CookieUtil {
     // 객체를 직렬화해 쿠키의 값으로 변환
     public static String serialize(Object object) {
         return Base64.getUrlEncoder()
-                .encodeToString(SerializationUtils.serialize(object))
+                .encodeToString(SerializationUtils.serialize((Serializable) object));
     }
 
     // 쿠키를 역직렬화해 객체로 변화

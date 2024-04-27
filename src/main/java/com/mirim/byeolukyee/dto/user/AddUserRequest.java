@@ -3,7 +3,6 @@ package com.mirim.byeolukyee.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddUserRequestDto {
+public class AddUserRequest {
     @NotBlank(message = "이름은 공백일 수 없습니다.")
     private String name;
 

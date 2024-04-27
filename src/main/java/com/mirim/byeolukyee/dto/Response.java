@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ResponseDto {
+public class Response {
     private final Boolean isDeleted;
 
     @JsonFormat(pattern = "yyyy-MM-dd")

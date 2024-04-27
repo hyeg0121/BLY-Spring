@@ -1,8 +1,7 @@
 package com.mirim.byeolukyee.service;
 
-import com.mirim.byeolukyee.domain.Post;
 import com.mirim.byeolukyee.dto.sellingpost.AddSellingPostRequest;
-import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponseDto;
+import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.dto.sellingpost.UpdateSellingPostRequest;
 import com.mirim.byeolukyee.domain.SellingPost;
 import com.mirim.byeolukyee.domain.User;
@@ -26,20 +25,20 @@ public class SellingPostService {
     private final UserRepository userRepository;
 
 
-    public List<SellingPostResponseDto> findAllSellingPosts() {
+    public List<SellingPostResponse> findAllSellingPosts() {
         List<SellingPost> sellingPosts = sellingPostRepository.findAll();
         return sellingPosts.stream()
-                .map(SellingPostResponseDto::from)
+                .map(SellingPostResponse::from)
                 .collect(Collectors.toList());
     }
 
-    public SellingPostResponseDto findSellingPostById(Long id) {
+    public SellingPostResponse findSellingPostById(Long id) {
         SellingPost sellingPost = sellingPostRepository.findById(id).orElseThrow(() -> PostNotFoundException.EXCEPTION);
-        return SellingPostResponseDto.from(sellingPost);
+        return SellingPostResponse.from(sellingPost);
     }
 
     @Transactional
-    public SellingPostResponseDto createSellingPost(AddSellingPostRequest addSellingPostRequest) {
+    public SellingPostResponse createSellingPost(AddSellingPostRequest addSellingPostRequest) {
 
         User user = userRepository.findById(addSellingPostRequest.getUserId())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
@@ -55,11 +54,11 @@ public class SellingPostService {
 
         SellingPost savedSellingPost = sellingPostRepository.save(sellingPost);
 
-        return SellingPostResponseDto.from(savedSellingPost);
+        return SellingPostResponse.from(savedSellingPost);
     }
 
     @Transactional
-    public SellingPostResponseDto updateSellingPost(Long id, UpdateSellingPostRequest updateSellingPostRequest) {
+    public SellingPostResponse updateSellingPost(Long id, UpdateSellingPostRequest updateSellingPostRequest) {
         SellingPost sellingPost = sellingPostRepository.findById(id)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
@@ -73,7 +72,7 @@ public class SellingPostService {
 
         SellingPost updatedSellingPost = sellingPostRepository.save(sellingPost);
 
-        return SellingPostResponseDto.from(updatedSellingPost);
+        return SellingPostResponse.from(updatedSellingPost);
     }
 
     public void deleteSellingPost(Long id) {

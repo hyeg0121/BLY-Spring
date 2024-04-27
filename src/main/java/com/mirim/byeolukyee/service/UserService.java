@@ -1,8 +1,8 @@
 package com.mirim.byeolukyee.service;
 
-import com.mirim.byeolukyee.dto.user.AddUserRequestDto;
-import com.mirim.byeolukyee.dto.user.SignInUserRequestDto;
-import com.mirim.byeolukyee.dto.user.UserResponseDto;
+import com.mirim.byeolukyee.dto.user.AddUserRequest;
+import com.mirim.byeolukyee.dto.user.SignInUserRequest;
+import com.mirim.byeolukyee.dto.user.UserResponse;
 import com.mirim.byeolukyee.domain.User;
 import com.mirim.byeolukyee.exception.DuplicateEmailException;
 import com.mirim.byeolukyee.exception.IncorrectPasswordException;
@@ -25,20 +25,20 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
-    public List<UserResponseDto> findAllUser() {
+    public List<UserResponse> findAllUser() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map(UserResponseDto::from)
+                .map(UserResponse::from)
                 .collect(Collectors.toList());
     }
 
-    public UserResponseDto findUserById(Long id) {
+    public UserResponse findUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> UserNotFoundException.EXCEPTION);
-        return UserResponseDto.from(user);
+        return UserResponse.from(user);
     }
 
     @Transactional
-    public UserResponseDto createUser(AddUserRequestDto addUserRequestDto) {
+    public UserResponse createUser(AddUserRequest addUserRequestDto) {
         // 이메일 중복 체크
         checkDuplicateEmail(addUserRequestDto.getEmail());
 
@@ -56,18 +56,18 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         // UserResponseDto 생성
-        return UserResponseDto.from(savedUser);
+        return UserResponse.from(savedUser);
     }
 
     @Transactional
-    public UserResponseDto signIn(SignInUserRequestDto signInUserRequestDto) {
+    public UserResponse signIn(SignInUserRequest signInUserRequestDto) {
         // 이메일로 유저 존재 확인
         User user = userRepository.findByEmail(signInUserRequestDto.getEmail())
                 .orElseThrow(()-> UserNotFoundException.EXCEPTION);
 
         // 비밀번호 확인
         if (BCrypt.checkpw(signInUserRequestDto.getPassword(), user.getPassword()))
-            return UserResponseDto.from(user);
+            return UserResponse.from(user);
         else
             throw IncorrectPasswordException.EXCEPTION;
 

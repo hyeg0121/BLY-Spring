@@ -62,3 +62,7 @@ test {
 compileJava {
     options.compilerArgs += ["-parameters"]
 }
+
+jar {
+    enabled = false
+}

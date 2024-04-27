@@ -1,7 +1,7 @@
 package com.mirim.byeolukyee.controller;
 
 import com.mirim.byeolukyee.dto.sellingpost.AddSellingPostRequest;
-import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponseDto;
+import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.dto.sellingpost.UpdateSellingPostRequest;
 import com.mirim.byeolukyee.service.SellingPostService;
 import lombok.RequiredArgsConstructor;
@@ -19,26 +19,26 @@ public class SellingPostController {
     private final SellingPostService sellingPostService;
 
     @GetMapping
-    public ResponseEntity<List<SellingPostResponseDto>> getAllSellingPosts() {
+    public ResponseEntity<List<SellingPostResponse>> getAllSellingPosts() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingPostService.findAllSellingPosts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SellingPostResponseDto> getSellingPostById(@PathVariable Long id) {
+    public ResponseEntity<SellingPostResponse> getSellingPostById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingPostService.findSellingPostById(id));
     }
 
     @PostMapping
-    public ResponseEntity<SellingPostResponseDto> createSellingPost(@RequestBody AddSellingPostRequest addSellingPostRequest) {
+    public ResponseEntity<SellingPostResponse> createSellingPost(@RequestBody AddSellingPostRequest addSellingPostRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(sellingPostService.createSellingPost(addSellingPostRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SellingPostResponseDto> updateSellingPost(
-            @PathVariable Long id,
+    public ResponseEntity<SellingPostResponse> updateSellingPost(
+            @PathVariable("id") Long id,
             @RequestBody UpdateSellingPostRequest updateSellingPostRequest
     ) {
         return ResponseEntity.status(HttpStatus.OK)
@@ -46,7 +46,7 @@ public class SellingPostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         sellingPostService.deleteSellingPost(id);
         return ResponseEntity.noContent().build();
     }

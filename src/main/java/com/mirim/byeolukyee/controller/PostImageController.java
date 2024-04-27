@@ -1,6 +1,6 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.postimage.PostImageResponseDto;
+import com.mirim.byeolukyee.dto.postimage.PostImageResponse;
 import com.mirim.byeolukyee.service.PostImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -23,7 +23,7 @@ public class PostImageController {
     private final PostImageService postImageService;
 
     @PostMapping(value = "/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<List<PostImageResponseDto>> uploadPostImage(
+    public ResponseEntity<List<PostImageResponse>> uploadPostImage(
             @PathVariable Long id,
             @RequestParam("file") List<MultipartFile> files
     ) throws IOException {
@@ -33,7 +33,7 @@ public class PostImageController {
 
     @GetMapping("/{uploadedFileName}")
     @ResponseBody
-    public ResponseEntity<Resource> getImage(@PathVariable String uploadedFileName) throws IOException {
+    public ResponseEntity<Resource> getImage(@PathVariable("id") String uploadedFileName) throws IOException {
         Resource imageResource = postImageService.getImageResource(uploadedFileName);
 
         // 이미지 파일의 MIME 타입 추정

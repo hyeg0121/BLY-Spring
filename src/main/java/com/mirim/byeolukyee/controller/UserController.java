@@ -1,8 +1,8 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.user.AddUserRequestDto;
-import com.mirim.byeolukyee.dto.user.SignInUserRequestDto;
-import com.mirim.byeolukyee.dto.user.UserResponseDto;
+import com.mirim.byeolukyee.dto.user.AddUserRequest;
+import com.mirim.byeolukyee.dto.user.SignInUserRequest;
+import com.mirim.byeolukyee.dto.user.UserResponse;
 import com.mirim.byeolukyee.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,30 +18,30 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserResponseDto> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         return userService.findAllUser();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findUserById(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody AddUserRequestDto addUserRequestDto) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody AddUserRequest addUserRequestDto) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.createUser(addUserRequestDto));
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<UserResponseDto> signInUser(@RequestBody SignInUserRequestDto signInUserRequestDto) {
+    public ResponseEntity<UserResponse> signInUser(@RequestBody SignInUserRequest signInUserRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.signIn(signInUserRequestDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

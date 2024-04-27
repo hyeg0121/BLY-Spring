@@ -33,9 +33,8 @@ public class WebOauthSecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers(
-                        new AntPathRequestMatcher("/img/**"),
-                        new AntPathRequestMatcher("/css/**"),
-                        new AntPathRequestMatcher("/js/**")
+                        // TODO: AntPathRequestMatcher 수정
+                        new AntPathRequestMatcher("/**")
                 );
     }
 

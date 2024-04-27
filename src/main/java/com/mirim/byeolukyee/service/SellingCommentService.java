@@ -1,9 +1,9 @@
 package com.mirim.byeolukyee.service;
 
 import com.mirim.byeolukyee.constant.SellingCommentStatus;
-import com.mirim.byeolukyee.dto.sellingcomment.AddSellingCommentRequestDto;
-import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
-import com.mirim.byeolukyee.dto.sellingcomment.UpdateSellingCommentRequestDto;
+import com.mirim.byeolukyee.dto.sellingcomment.AddSellingCommentRequest;
+import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponse;
+import com.mirim.byeolukyee.dto.sellingcomment.UpdateSellingCommentRequest;
 import com.mirim.byeolukyee.domain.BuyingPost;
 import com.mirim.byeolukyee.domain.SellingComment;
 import com.mirim.byeolukyee.domain.User;
@@ -28,21 +28,21 @@ public class SellingCommentService {
     private final BuyingPostRepository buyingPostRepository;
     private final UserRepository userRepository;
 
-    public List<SellingCommentResponseDto> findAllSellingComments() {
+    public List<SellingCommentResponse> findAllSellingComments() {
         List<SellingComment> sellingComments = sellingCommentRepository.findAll();
         return sellingComments.stream()
-                .map(SellingCommentResponseDto::from)
+                .map(SellingCommentResponse::from)
                 .collect(Collectors.toList());
     }
 
-    public SellingCommentResponseDto findSellingCommentById(Long id) {
+    public SellingCommentResponse findSellingCommentById(Long id) {
         SellingComment sellingComment = sellingCommentRepository.findById(id)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
-        return SellingCommentResponseDto.from(sellingComment);
+        return SellingCommentResponse.from(sellingComment);
     }
 
     @Transactional
-    public SellingCommentResponseDto createSellingComment(AddSellingCommentRequestDto addSellingCommentRequestDto) {
+    public SellingCommentResponse createSellingComment(AddSellingCommentRequest addSellingCommentRequestDto) {
 
         User user = userRepository.findById(addSellingCommentRequestDto.getUserId())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
@@ -63,11 +63,11 @@ public class SellingCommentService {
 
         SellingComment savedSellingComment = sellingCommentRepository.save(sellingComment);
 
-        return SellingCommentResponseDto.from(savedSellingComment);
+        return SellingCommentResponse.from(savedSellingComment);
     }
 
     @Transactional
-    public SellingCommentResponseDto updateSellingComment(Long id, UpdateSellingCommentRequestDto updateSellingCommentRequestDto) {
+    public SellingCommentResponse updateSellingComment(Long id, UpdateSellingCommentRequest updateSellingCommentRequestDto) {
         SellingComment sellingComment = sellingCommentRepository.findById(id)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
@@ -81,7 +81,7 @@ public class SellingCommentService {
 
         SellingComment updatedSellingComment = sellingCommentRepository.save(sellingComment);
 
-        return SellingCommentResponseDto.from(updatedSellingComment);
+        return SellingCommentResponse.from(updatedSellingComment);
     }
 
     public void deleteSellingComment(Long id) {

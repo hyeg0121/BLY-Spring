@@ -1,8 +1,8 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.sellingcomment.AddSellingCommentRequestDto;
-import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
-import com.mirim.byeolukyee.dto.sellingcomment.UpdateSellingCommentRequestDto;
+import com.mirim.byeolukyee.dto.sellingcomment.AddSellingCommentRequest;
+import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponse;
+import com.mirim.byeolukyee.dto.sellingcomment.UpdateSellingCommentRequest;
 import com.mirim.byeolukyee.service.SellingCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,34 +19,34 @@ public class SellingCommentController {
     private final SellingCommentService sellingCommentService;
 
     @GetMapping
-    public ResponseEntity<List<SellingCommentResponseDto>> findAllSellingComments() {
+    public ResponseEntity<List<SellingCommentResponse>> findAllSellingComments() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingCommentService.findAllSellingComments());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SellingCommentResponseDto> findSellingCommnetById(@PathVariable Long id) {
+    public ResponseEntity<SellingCommentResponse> findSellingCommentById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingCommentService.findSellingCommentById(id));
     }
 
     @PostMapping
-    public ResponseEntity<SellingCommentResponseDto> createSellingComment(@RequestBody AddSellingCommentRequestDto addSellingCommentRequestDto) {
+    public ResponseEntity<SellingCommentResponse> createSellingComment(@RequestBody AddSellingCommentRequest addSellingCommentRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(sellingCommentService.createSellingComment(addSellingCommentRequestDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SellingCommentResponseDto> updateSellingComment(
-            @PathVariable Long id,
-            @RequestBody UpdateSellingCommentRequestDto updateSellingCommentRequestDto
+    public ResponseEntity<SellingCommentResponse> updateSellingComment(
+            @PathVariable("id") Long id,
+            @RequestBody UpdateSellingCommentRequest updateSellingCommentRequestDto
     ) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingCommentService.updateSellingComment(id, updateSellingCommentRequestDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         sellingCommentService.deleteSellingComment(id);
         return ResponseEntity.noContent().build();
     }

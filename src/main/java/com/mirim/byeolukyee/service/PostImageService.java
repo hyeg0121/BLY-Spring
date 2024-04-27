@@ -2,7 +2,7 @@ package com.mirim.byeolukyee.service;
 
 import com.mirim.byeolukyee.domain.Post;
 import com.mirim.byeolukyee.domain.PostImage;
-import com.mirim.byeolukyee.dto.postimage.PostImageResponseDto;
+import com.mirim.byeolukyee.dto.postimage.PostImageResponse;
 import com.mirim.byeolukyee.exception.ImageNotFoundException;
 import com.mirim.byeolukyee.exception.PostNotFoundException;
 import com.mirim.byeolukyee.repository.SellingPostRepository;
@@ -32,9 +32,9 @@ public class PostImageService {
     private final SellingPostRepository sellingPostRepository;
 
     @Transactional
-    public List<PostImageResponseDto> uploadPostImage(Long id, List<MultipartFile> images) throws IOException {
+    public List<PostImageResponse> uploadPostImage(Long id, List<MultipartFile> images) throws IOException {
 
-        List<PostImageResponseDto> postImageResponseDtos = new ArrayList<>();
+        List<PostImageResponse> postImageResponseDtos = new ArrayList<>();
 
         for (MultipartFile image : images) {
             // 파일 이름 (+확장자)
@@ -70,7 +70,7 @@ public class PostImageService {
                     .filePath("/uploaded/" + uploadedFileName)
                     .build();
 
-            postImageResponseDtos.add(PostImageResponseDto.from(postImageRepository.save(postImage)));
+            postImageResponseDtos.add(PostImageResponse.from(postImageRepository.save(postImage)));
         }
 
 

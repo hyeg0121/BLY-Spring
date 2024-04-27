@@ -1,10 +1,10 @@
 package com.mirim.byeolukyee.dto.sellingcomment;
 
 import com.mirim.byeolukyee.constant.SellingCommentStatus;
-import com.mirim.byeolukyee.dto.post.UpdatePostRequesetDto;
+import com.mirim.byeolukyee.dto.post.UpdatePostRequeset;
 import lombok.Getter;
 
 @Getter
-public class UpdateSellingCommentRequestDto extends UpdatePostRequesetDto {
+public class UpdateSellingCommentRequest extends UpdatePostRequeset {
     private SellingCommentStatus status;
 }

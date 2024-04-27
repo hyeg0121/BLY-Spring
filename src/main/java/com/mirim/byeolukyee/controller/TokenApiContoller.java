@@ -1,7 +1,7 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.token.CreateAccessTokenRequestDto;
-import com.mirim.byeolukyee.dto.token.CreateAccessTokenResponseDto;
+import com.mirim.byeolukyee.dto.token.CreateAccessTokenRequest;
+import com.mirim.byeolukyee.dto.token.CreateAccessTokenResponse;
 import com.mirim.byeolukyee.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ public class TokenApiContoller {
     private final TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<CreateAccessTokenResponseDto> createNewAccessToken(
-            @RequestBody CreateAccessTokenRequestDto request
+    public ResponseEntity<CreateAccessTokenResponse> createNewAccessToken(
+            @RequestBody CreateAccessTokenRequest request
     ) {
         String newAccessToken = tokenService.createNewAccessToken(request.getRefreshToken());
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new CreateAccessTokenResponseDto(newAccessToken));
+                .body(new CreateAccessTokenResponse(newAccessToken));
     }
 }

@@ -1,9 +1,9 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.buyingpost.AddBuyingPostRequestDto;
-import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponseDto;
-import com.mirim.byeolukyee.dto.buyingpost.UpdateBuyingPostRequestDto;
-import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponseDto;
+import com.mirim.byeolukyee.dto.buyingpost.AddBuyingPostRequest;
+import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponse;
+import com.mirim.byeolukyee.dto.buyingpost.UpdateBuyingPostRequest;
+import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.service.BuyingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,27 +20,27 @@ public class BuyingPostController {
     private final BuyingPostService buyingPostService;
 
     @GetMapping
-    public ResponseEntity<List<BuyingPostResponseDto>> getAllBuyingPosts() {
+    public ResponseEntity<List<BuyingPostResponse>> getAllBuyingPosts() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(buyingPostService.findALlBuyingPosts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BuyingPostResponseDto> getBuyingPostById(@PathVariable Long id) {
+    public ResponseEntity<BuyingPostResponse> getBuyingPostById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(buyingPostService.findBuyingPostById(id));
     }
 
     @PostMapping
-    public ResponseEntity<BuyingPostResponseDto> createBuyingRequest(@RequestBody AddBuyingPostRequestDto addBuyingPostRequestDto) {
+    public ResponseEntity<BuyingPostResponse> createBuyingRequest(@RequestBody AddBuyingPostRequest addBuyingPostRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(buyingPostService.createBuyingPost(addBuyingPostRequestDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BuyingPostResponseDto> updateBuyingRequeest(
-            @PathVariable Long id,
-            @RequestBody UpdateBuyingPostRequestDto updateBuyingPostRequestDto
+    public ResponseEntity<BuyingPostResponse> updateBuyingRequeest(
+            @PathVariable("id") Long id,
+            @RequestBody UpdateBuyingPostRequest updateBuyingPostRequestDto
     ) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(buyingPostService.updateBuyingPost(id, updateBuyingPostRequestDto));
@@ -54,12 +54,12 @@ public class BuyingPostController {
     }
 
     @GetMapping("/{id}/selling-comments")
-    public ResponseEntity<List<SellingCommentResponseDto>> findSellingComments(@PathVariable Long id) {
+    public ResponseEntity<List<SellingCommentResponse>> findSellingComments(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(buyingPostService.findSellingComments(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         buyingPostService.deleteBuyingPost(id);
         return ResponseEntity.noContent().build();
     }

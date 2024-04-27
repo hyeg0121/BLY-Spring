@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInUserRequestDto {
+public class SignInUserRequest {
     @Email
     @NotBlank(message = "이메일은 공백일 수 없습니다.")
     private String email;

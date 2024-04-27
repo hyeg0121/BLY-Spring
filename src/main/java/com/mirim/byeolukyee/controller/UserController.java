@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findUserById(id));
     }
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

@@ -25,7 +25,7 @@ public class SellingPostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SellingPostResponseDto> getSellingPostById(@PathVariable Long id) {
+    public ResponseEntity<SellingPostResponseDto> getSellingPostById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(sellingPostService.findSellingPostById(id));
     }
@@ -38,7 +38,7 @@ public class SellingPostController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SellingPostResponseDto> updateSellingPost(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateSellingPostRequest updateSellingPostRequest
     ) {
         return ResponseEntity.status(HttpStatus.OK)
@@ -46,7 +46,7 @@ public class SellingPostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyingPost(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         sellingPostService.deleteSellingPost(id);
         return ResponseEntity.noContent().build();
     }

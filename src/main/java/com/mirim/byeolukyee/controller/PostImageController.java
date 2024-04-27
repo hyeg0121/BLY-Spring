@@ -33,7 +33,7 @@ public class PostImageController {
 
     @GetMapping("/{uploadedFileName}")
     @ResponseBody
-    public ResponseEntity<Resource> getImage(@PathVariable String uploadedFileName) throws IOException {
+    public ResponseEntity<Resource> getImage(@PathVariable("id") String uploadedFileName) throws IOException {
         Resource imageResource = postImageService.getImageResource(uploadedFileName);
 
         // 이미지 파일의 MIME 타입 추정

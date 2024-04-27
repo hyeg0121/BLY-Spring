@@ -14,6 +14,18 @@ jobs:
     steps:
       # uses: 지정한 리포지터리를 확인하고 코드에 대한 작업 실행
       - uses: actions/checkout@v3
+      - run: touch ./src/main/resources/application-db.properties
+      - run: echo "${{ secrets.DB }}" > ./src/main/resources/application-db.properties
+      - run: cat ./src/main/resources/application-db.properties
+
+      - run: touch ./src/main/resources/application-jwt.properties
+      - run: echo "${{ secrets.JWT }}" > ./src/main/resources/application-jwt.properties
+      - run: cat ./src/main/resources/application-jwt.properties
+
+      - run: touch ./src/main/resources/application-oauth.properties
+      - run: echo "${{ secrets.OAUTH2 }}" > ./src/main/resources/application-oauth.properties
+      - run: cat ./src/main/resources/application-oauth.properties
+
       - uses: actions/setup-java@v3
         with:
             distribution: 'zulu'

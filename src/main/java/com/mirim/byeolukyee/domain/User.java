@@ -29,6 +29,7 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String studentId;   // 학번
 
+    @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> items = new ArrayList<>();  // 아이템 리스트

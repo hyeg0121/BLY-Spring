@@ -22,6 +22,7 @@ public class BuyingPost extends Post {
     @Column(nullable = false)
     private BuyingPostStatus status = BuyingPostStatus.IN_PROGRESS;
 
+    @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "referenceItem", cascade = CascadeType.ALL)
     private List<SellingComment> referencingItems = new ArrayList<>();

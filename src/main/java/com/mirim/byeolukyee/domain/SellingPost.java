@@ -21,6 +21,7 @@ public class SellingPost extends Post {
     @Column(nullable = false)
     private SellingPostStatus status = SellingPostStatus.IN_PROGRESS;
 
+    @Builder.Default
     @OneToMany(
             mappedBy = "post",
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},

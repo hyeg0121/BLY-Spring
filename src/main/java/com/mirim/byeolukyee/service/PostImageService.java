@@ -1,25 +1,20 @@
 package com.mirim.byeolukyee.service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.mirim.byeolukyee.domain.Post;
 import com.mirim.byeolukyee.domain.PostImage;
 import com.mirim.byeolukyee.dto.postimage.PostImageResponse;
-import com.mirim.byeolukyee.exception.ImageNotFoundException;
 import com.mirim.byeolukyee.exception.PostNotFoundException;
 import com.mirim.byeolukyee.repository.SellingPostRepository;
 import com.mirim.byeolukyee.repository.PostImageRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +25,10 @@ public class PostImageService {
 
     private final PostImageRepository postImageRepository;
     private final SellingPostRepository sellingPostRepository;
+    private final AmazonS3Client amazonS3Client;
+
+    @Value("${cloud.aws.s3.bucketName}")
+    private String bucket;
 
     @Transactional
     public List<PostImageResponse> uploadPostImage(Long id, List<MultipartFile> images) throws IOException {
@@ -42,21 +41,19 @@ public class PostImageService {
             int dotIndex = originalFileName.lastIndexOf('.');
 
             // 파일 이름과 확장자 분리
-            String filename = originalFileName.substring(0, dotIndex);
+            String fileName = originalFileName.substring(0, dotIndex);
             String extension = originalFileName.substring(dotIndex + 1);
-
-            System.out.println("filename : " + originalFileName + ", ext : " + extension);
 
             // 새로운 파일 이름 생성
             long unixTimeMillis = System.currentTimeMillis();
-            String uploadedFileName = filename + "_" + unixTimeMillis + "." + extension;
+            String uploadedFileName = fileName + "_" + unixTimeMillis + "." + extension;
 
-            // uploaded 폴더에 업로드
-            File uploadedFile = new File("uploaded/" + uploadedFileName);
-            FileOutputStream fos = new FileOutputStream(uploadedFile);
-            fos.write(image.getBytes());
+            ObjectMetadata metadata= new ObjectMetadata();
+            metadata.setContentType(image.getContentType());
+            metadata.setContentLength(image.getSize());
 
-            fos.close();
+            amazonS3Client.putObject(bucket, uploadedFileName, image.getInputStream(), metadata);
+            String filePath = "https://" + bucket + "/test" + uploadedFileName;
 
 
             // 엔티티 저장
@@ -67,7 +64,7 @@ public class PostImageService {
                     .post(post)
                     .orignalFilename(originalFileName)
                     .uploadedFilename(uploadedFileName)
-                    .filePath("/uploaded/" + uploadedFileName)
+                    .filePath(filePath)
                     .build();
 
             postImageResponseDtos.add(PostImageResponse.from(postImageRepository.save(postImage)));
@@ -75,20 +72,6 @@ public class PostImageService {
 
 
         return postImageResponseDtos;
-    }
-
-    public Resource getImageResource(String uploadedFileName) throws IOException {
-        // 이미지 파일의 경로를 가져옴
-        Path imagePath = Paths.get("uploaded", uploadedFileName);
-
-        // 해당 경로에 파일이 존재하는지 확인
-        if (!Files.exists(imagePath) || Files.isDirectory(imagePath)) {
-            // 파일이 존재하지 않거나 디렉토리인 경우 Exception 발생
-            throw ImageNotFoundException.EXCEPTION;
-        }
-
-        // 이미지 파일을 Resource 객체로 읽어와 반환
-        return new FileSystemResource(imagePath.toFile());
     }
 
 }

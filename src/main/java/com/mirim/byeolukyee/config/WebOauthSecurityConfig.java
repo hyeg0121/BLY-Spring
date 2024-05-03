@@ -51,7 +51,6 @@ public class WebOauthSecurityConfig {
                 .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/token")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/**")).authenticated()
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")

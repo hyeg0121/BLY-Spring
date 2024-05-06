@@ -2,14 +2,15 @@ package com.mirim.byeolukyee.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class PostImage {
+@SuperBuilder
+public class PostImage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +29,4 @@ public class PostImage {
 
     @Column(nullable = false)
     private String filePath;
-
-    @Builder
-    public PostImage(Long id, Post post, String orignalFilename, String uploadedFilename, String filePath) {
-        this.id = id;
-        this.post = post;
-        this.orignalFilename = orignalFilename;
-        this.uploadedFilename = uploadedFilename;
-        this.filePath = filePath;
-    }
 }

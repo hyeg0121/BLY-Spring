@@ -33,8 +33,9 @@ public class WebOauthSecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers(
-                        // TODO: AntPathRequestMatcher 수정
-                        new AntPathRequestMatcher("/**")
+                        new AntPathRequestMatcher("/selling-posts/**"),
+                        new AntPathRequestMatcher("/selling-comments/**"),
+                        new AntPathRequestMatcher("/buying-posts/**")
                 );
     }
 
@@ -51,6 +52,8 @@ public class WebOauthSecurityConfig {
                 .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/token")).permitAll()
+                        //임시
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")

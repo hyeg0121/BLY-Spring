@@ -1,6 +1,7 @@
 package com.mirim.byeolukyee.domain.post;
 
 import com.mirim.byeolukyee.constant.status.SellingPostStatus;
+import com.mirim.byeolukyee.domain.image.PostImage;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

@@ -1,6 +1,6 @@
 package com.mirim.byeolukyee.dto.post.postimage;
 
-import com.mirim.byeolukyee.domain.post.PostImage;
+import com.mirim.byeolukyee.domain.image.PostImage;
 import lombok.Builder;
 import lombok.Getter;
 

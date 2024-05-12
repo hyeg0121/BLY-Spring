@@ -1,7 +1,7 @@
-package com.mirim.byeolukyee.domain.post;
+package com.mirim.byeolukyee.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mirim.byeolukyee.domain.BaseEntity;
+import com.mirim.byeolukyee.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +11,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Entity
 @SuperBuilder
-public class PostImage extends BaseEntity {
-
+public class ProfileImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @Column(nullable = false)
     private String originalFilename;

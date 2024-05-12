@@ -3,7 +3,7 @@ package com.mirim.byeolukyee.service.post;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.mirim.byeolukyee.domain.post.Post;
-import com.mirim.byeolukyee.domain.post.PostImage;
+import com.mirim.byeolukyee.domain.image.PostImage;
 import com.mirim.byeolukyee.dto.post.postimage.PostImageResponse;
 import com.mirim.byeolukyee.exception.post.PostNotFoundException;
 import com.mirim.byeolukyee.repository.post.SellingPostRepository;

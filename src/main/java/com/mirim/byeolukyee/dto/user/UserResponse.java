@@ -1,7 +1,7 @@
 package com.mirim.byeolukyee.dto.user;
 
 import com.mirim.byeolukyee.dto.Response;
-import com.mirim.byeolukyee.domain.User;
+import com.mirim.byeolukyee.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 

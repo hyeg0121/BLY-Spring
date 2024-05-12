@@ -1,10 +1,10 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.buyingpost.AddBuyingPostRequest;
-import com.mirim.byeolukyee.dto.buyingpost.BuyingPostResponse;
-import com.mirim.byeolukyee.dto.buyingpost.UpdateBuyingPostRequest;
-import com.mirim.byeolukyee.dto.sellingcomment.SellingCommentResponse;
-import com.mirim.byeolukyee.service.BuyingPostService;
+import com.mirim.byeolukyee.dto.post.buyingpost.AddBuyingPostRequest;
+import com.mirim.byeolukyee.dto.post.buyingpost.BuyingPostResponse;
+import com.mirim.byeolukyee.dto.post.buyingpost.UpdateBuyingPostRequest;
+import com.mirim.byeolukyee.dto.post.sellingcomment.SellingCommentResponse;
+import com.mirim.byeolukyee.service.post.BuyingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,13 @@
 package com.mirim.byeolukyee.exception.handler;
 
-import com.mirim.byeolukyee.exception.*;
-import com.mirim.byeolukyee.exception.error.ErrorCode;
-import com.mirim.byeolukyee.exception.error.ErrorResponse;
-import org.springframework.http.HttpStatus;
+import com.mirim.byeolukyee.constant.code.ErrorCode;
+import com.mirim.byeolukyee.exception.dto.ErrorResponse;
+import com.mirim.byeolukyee.exception.image.ImageNotFoundException;
+import com.mirim.byeolukyee.exception.post.PostNotFoundException;
+import com.mirim.byeolukyee.exception.user.DuplicateEmailException;
+import com.mirim.byeolukyee.exception.user.IncorrectPasswordException;
+import com.mirim.byeolukyee.exception.user.InvalidTokenException;
+import com.mirim.byeolukyee.exception.user.UserNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

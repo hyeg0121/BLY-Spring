@@ -1,7 +1,7 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.postimage.PostImageResponse;
-import com.mirim.byeolukyee.service.PostImageService;
+import com.mirim.byeolukyee.dto.image.ImageResponse;
+import com.mirim.byeolukyee.service.post.PostImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ public class PostImageController {
     private final PostImageService postImageService;
 
     @PostMapping(value = "/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<List<PostImageResponse>> uploadPostImage(
+    public ResponseEntity<List<ImageResponse>> uploadPostImage(
             @PathVariable("id") Long id,
             @RequestParam("file") List<MultipartFile> files
     ) throws IOException {

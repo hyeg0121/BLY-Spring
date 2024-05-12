@@ -1,8 +1,8 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.token.CreateAccessTokenRequest;
-import com.mirim.byeolukyee.dto.token.CreateAccessTokenResponse;
-import com.mirim.byeolukyee.service.TokenService;
+import com.mirim.byeolukyee.dto.user.token.CreateAccessTokenRequest;
+import com.mirim.byeolukyee.dto.user.token.CreateAccessTokenResponse;
+import com.mirim.byeolukyee.service.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

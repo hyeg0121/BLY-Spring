@@ -1,9 +1,8 @@
 package com.mirim.byeolukyee.exception.handler;
 
 import com.mirim.byeolukyee.exception.*;
-import com.mirim.byeolukyee.exception.error.ErrorCode;
-import com.mirim.byeolukyee.exception.error.ErrorResponse;
-import org.springframework.http.HttpStatus;
+import com.mirim.byeolukyee.constant.ErrorCode;
+import com.mirim.byeolukyee.exception.dto.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

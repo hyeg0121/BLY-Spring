@@ -1,6 +1,5 @@
-package com.mirim.byeolukyee.exception.error;
+package com.mirim.byeolukyee.constant;
 
-import com.mirim.byeolukyee.exception.InvalidTokenException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

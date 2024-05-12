@@ -1,6 +1,6 @@
 package com.mirim.byeolukyee.exception;
 
-import com.mirim.byeolukyee.exception.error.ErrorCode;
+import com.mirim.byeolukyee.constant.ErrorCode;
 
 public class InvalidTokenException extends GeneralException {
 

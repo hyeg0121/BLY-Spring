@@ -1,7 +1,7 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.postimage.PostImageResponse;
-import com.mirim.byeolukyee.service.PostImageService;
+import com.mirim.byeolukyee.dto.post.postimage.PostImageResponse;
+import com.mirim.byeolukyee.service.post.PostImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

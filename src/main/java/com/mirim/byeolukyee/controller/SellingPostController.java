@@ -1,9 +1,9 @@
 package com.mirim.byeolukyee.controller;
 
-import com.mirim.byeolukyee.dto.sellingpost.AddSellingPostRequest;
-import com.mirim.byeolukyee.dto.sellingpost.SellingPostResponse;
-import com.mirim.byeolukyee.dto.sellingpost.UpdateSellingPostRequest;
-import com.mirim.byeolukyee.service.SellingPostService;
+import com.mirim.byeolukyee.dto.post.sellingpost.AddSellingPostRequest;
+import com.mirim.byeolukyee.dto.post.sellingpost.SellingPostResponse;
+import com.mirim.byeolukyee.dto.post.sellingpost.UpdateSellingPostRequest;
+import com.mirim.byeolukyee.service.post.SellingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

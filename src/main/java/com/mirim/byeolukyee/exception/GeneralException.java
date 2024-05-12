@@ -1,6 +1,6 @@
 package com.mirim.byeolukyee.exception;
 
-import com.mirim.byeolukyee.constant.ErrorCode;
+import com.mirim.byeolukyee.constant.code.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

@@ -3,7 +3,7 @@ package com.mirim.byeolukyee.controller;
 import com.mirim.byeolukyee.dto.user.AddUserRequest;
 import com.mirim.byeolukyee.dto.user.SignInUserRequest;
 import com.mirim.byeolukyee.dto.user.UserResponse;
-import com.mirim.byeolukyee.service.UserService;
+import com.mirim.byeolukyee.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

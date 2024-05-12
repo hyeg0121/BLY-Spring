@@ -1,11 +1,11 @@
 package com.mirim.byeolukyee.config.oauth;
 
 import com.mirim.byeolukyee.config.jwt.TokenProvider;
-import com.mirim.byeolukyee.domain.RefreshToken;
-import com.mirim.byeolukyee.domain.User;
-import com.mirim.byeolukyee.exception.UserNotFoundException;
-import com.mirim.byeolukyee.repository.RefreshTokenRepository;
-import com.mirim.byeolukyee.repository.UserRepository;
+import com.mirim.byeolukyee.domain.token.RefreshToken;
+import com.mirim.byeolukyee.domain.user.User;
+import com.mirim.byeolukyee.exception.user.UserNotFoundException;
+import com.mirim.byeolukyee.repository.token.RefreshTokenRepository;
+import com.mirim.byeolukyee.repository.user.UserRepository;
 import com.mirim.byeolukyee.util.CookieUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

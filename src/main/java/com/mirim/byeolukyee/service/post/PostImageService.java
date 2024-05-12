@@ -4,7 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.mirim.byeolukyee.domain.post.Post;
 import com.mirim.byeolukyee.domain.image.PostImage;
-import com.mirim.byeolukyee.dto.post.postimage.PostImageResponse;
+import com.mirim.byeolukyee.dto.image.ImageResponse;
 import com.mirim.byeolukyee.exception.post.PostNotFoundException;
 import com.mirim.byeolukyee.repository.post.SellingPostRepository;
 import com.mirim.byeolukyee.repository.post.PostImageRepository;
@@ -31,9 +31,9 @@ public class PostImageService {
     private String bucket;
 
     @Transactional
-    public List<PostImageResponse> uploadPostImage(Long id, List<MultipartFile> images) throws IOException {
+    public List<ImageResponse> uploadPostImage(Long id, List<MultipartFile> images) throws IOException {
 
-        List<PostImageResponse> postImageResponseDtos = new ArrayList<>();
+        List<ImageResponse> postImageResponseDtos = new ArrayList<>();
 
         for (MultipartFile image : images) {
             // 파일 이름 (+확장자)
@@ -67,7 +67,7 @@ public class PostImageService {
                     .filePath(filePath)
                     .build();
 
-            postImageResponseDtos.add(PostImageResponse.from(postImageRepository.save(postImage)));
+            postImageResponseDtos.add(ImageResponse.from(postImageRepository.save(postImage)));
         }
 
 

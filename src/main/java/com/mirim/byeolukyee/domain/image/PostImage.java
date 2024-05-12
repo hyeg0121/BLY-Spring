@@ -1,34 +1,23 @@
 package com.mirim.byeolukyee.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mirim.byeolukyee.domain.BaseEntity;
 import com.mirim.byeolukyee.domain.post.Post;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Getter
-@NoArgsConstructor
 @Entity
+@DiscriminatorValue("POST_IMAGE")
+@Getter
 @SuperBuilder
-public class PostImage extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class PostImage extends Image {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
-
-    @Column(nullable = false)
-    private String originalFilename;
-
-    @Column(nullable = false)
-    private String uploadedFilename;
-
-    @Column(nullable = false)
-    private String filePath;
 }

@@ -2,7 +2,7 @@ package com.mirim.byeolukyee.dto.post.sellingpost;
 
 import com.mirim.byeolukyee.constant.status.SellingPostStatus;
 import com.mirim.byeolukyee.dto.post.PostResponse;
-import com.mirim.byeolukyee.dto.post.postimage.PostImageResponse;
+import com.mirim.byeolukyee.dto.image.ImageResponse;
 import com.mirim.byeolukyee.dto.user.UserResponse;
 import com.mirim.byeolukyee.domain.post.SellingPost;
 import lombok.Builder;
@@ -18,10 +18,10 @@ public class SellingPostResponse extends PostResponse {
 
     private final SellingPostStatus status;
     private final String krStatus;
-    private final List<PostImageResponse> images;
+    private final List<ImageResponse> images;
 
     @Builder
-    public SellingPostResponse(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponse user, String title, String description, Integer price, String location, SellingPostStatus status, List<PostImageResponse> images) {
+    public SellingPostResponse(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponse user, String title, String description, Integer price, String location, SellingPostStatus status, List<ImageResponse> images) {
         super(isDeleted, createdAt, updatedAt, id, user, title, description, price, location);
         this.status = status;
         this.krStatus = status.getKrName();
@@ -30,10 +30,10 @@ public class SellingPostResponse extends PostResponse {
 
     public static SellingPostResponse from(SellingPost sellingPost) {
 
-        List<PostImageResponse> postImageList = new ArrayList<>();
+        List<ImageResponse> postImageList = new ArrayList<>();
 
         if (sellingPost.getPostImageList() != null)
-            postImageList = sellingPost.getPostImageList().stream().map(PostImageResponse::from).collect(Collectors.toList());
+            postImageList = sellingPost.getPostImageList().stream().map(ImageResponse::from).collect(Collectors.toList());
 
 
         return SellingPostResponse.builder()

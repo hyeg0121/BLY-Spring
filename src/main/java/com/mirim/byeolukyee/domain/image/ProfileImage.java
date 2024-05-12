@@ -3,30 +3,21 @@ package com.mirim.byeolukyee.domain.image;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mirim.byeolukyee.domain.user.User;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Getter
-@NoArgsConstructor
 @Entity
+@DiscriminatorValue("PROFILE_IMAGE")
+@Getter
 @SuperBuilder
-public class ProfileImage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class ProfileImage extends Image {
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
-    @Column(nullable = false)
-    private String originalFilename;
-
-    @Column(nullable = false)
-    private String uploadedFilename;
-
-    @Column(nullable = false)
-    private String filePath;
 }

@@ -62,7 +62,7 @@ public class PostImageService {
 
             PostImage postImage = PostImage.builder()
                     .post(post)
-                    .orignalFilename(originalFileName)
+                    .originalFilename(originalFileName)
                     .uploadedFilename(uploadedFileName)
                     .filePath(filePath)
                     .build();

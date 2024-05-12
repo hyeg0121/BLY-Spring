@@ -22,7 +22,7 @@ public class PostImage extends BaseEntity {
     private Post post;
 
     @Column(nullable = false)
-    private String orignalFilename;
+    private String originalFilename;
 
     @Column(nullable = false)
     private String uploadedFilename;

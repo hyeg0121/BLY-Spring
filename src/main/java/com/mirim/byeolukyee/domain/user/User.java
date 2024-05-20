@@ -3,8 +3,7 @@ package com.mirim.byeolukyee.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mirim.byeolukyee.domain.BaseEntity;
 import com.mirim.byeolukyee.domain.image.ProfileImage;
-import com.mirim.byeolukyee.domain.post.Post;
-import com.mirim.byeolukyee.domain.image.PostImage;
+import com.mirim.byeolukyee.domain.post.SellingPost;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,14 +32,14 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String studentId;   // 학번
 
-    @Builder.Default
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Post> items = new ArrayList<>();  // 아이템 리스트
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_image_id", referencedColumnName = "id")
     private ProfileImage profileImage;
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<SellingPost> sellingPosts = new ArrayList<>();
 
     public User update(String name) {
         this.name = name;

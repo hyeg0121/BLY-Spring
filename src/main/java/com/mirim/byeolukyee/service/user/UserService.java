@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.service.user;
 
+import com.mirim.byeolukyee.dto.post.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.dto.user.AddUserRequest;
 import com.mirim.byeolukyee.dto.user.SignInUserRequest;
 import com.mirim.byeolukyee.dto.user.UserResponse;
@@ -78,6 +79,7 @@ public class UserService {
         if (userRepository.existsUserByEmail(email)) throw DuplicateEmailException.EXCEPTION;
     }
 
+    @Transactional
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
@@ -85,4 +87,14 @@ public class UserService {
         userRepository.save(user);
     }
 
+
+    public List<SellingPostResponse> findSellingPostsByUserId(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        return user.getSellingPosts()
+                .stream()
+                .map(SellingPostResponse::from)
+                .collect(Collectors.toList());
+    }
 }

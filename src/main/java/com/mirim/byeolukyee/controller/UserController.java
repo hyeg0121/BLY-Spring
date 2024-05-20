@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.controller;
 
+import com.mirim.byeolukyee.dto.post.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.dto.user.AddUserRequest;
 import com.mirim.byeolukyee.dto.user.SignInUserRequest;
 import com.mirim.byeolukyee.dto.user.UserResponse;
@@ -44,5 +45,11 @@ public class UserController {
     public ResponseEntity<Void> deleteBuyingPost(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/selling-posts")
+    public ResponseEntity<List<SellingPostResponse>> getSellingPosts(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(userService.findSellingPostsByUserId(id));
     }
 }

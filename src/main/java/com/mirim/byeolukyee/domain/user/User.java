@@ -3,6 +3,8 @@ package com.mirim.byeolukyee.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mirim.byeolukyee.domain.BaseEntity;
 import com.mirim.byeolukyee.domain.image.ProfileImage;
+import com.mirim.byeolukyee.domain.post.BuyingPost;
+import com.mirim.byeolukyee.domain.post.SellingComment;
 import com.mirim.byeolukyee.domain.post.SellingPost;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,6 +42,16 @@ public class User extends BaseEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SellingPost> sellingPosts = new ArrayList<>();
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<BuyingPost> buyingPosts = new ArrayList<>();
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<SellingComment> sellingComments = new ArrayList<>();
 
     public User update(String name) {
         this.name = name;

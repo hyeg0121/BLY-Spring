@@ -1,5 +1,7 @@
 package com.mirim.byeolukyee.controller;
 
+import com.mirim.byeolukyee.dto.post.buyingpost.BuyingPostResponse;
+import com.mirim.byeolukyee.dto.post.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.dto.post.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.dto.user.AddUserRequest;
 import com.mirim.byeolukyee.dto.user.SignInUserRequest;
@@ -49,7 +51,20 @@ public class UserController {
 
     @GetMapping("/{id}/selling-posts")
     public ResponseEntity<List<SellingPostResponse>> getSellingPosts(@PathVariable("id") Long id) {
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findSellingPostsByUserId(id));
     }
+
+    @GetMapping("/{id}/buying-posts")
+    public ResponseEntity<List<BuyingPostResponse>> getBuyingPosts(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.findBuyingPostsByUserId(id));
+    }
+
+    @GetMapping("/{id}/selling-comments")
+    public ResponseEntity<List<SellingCommentResponse>> getSellingComments(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.findSellingCommentsByUserId(id));
+    }
 }
+

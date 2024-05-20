@@ -1,5 +1,7 @@
 package com.mirim.byeolukyee.service.user;
 
+import com.mirim.byeolukyee.dto.post.buyingpost.BuyingPostResponse;
+import com.mirim.byeolukyee.dto.post.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.dto.post.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.dto.user.AddUserRequest;
 import com.mirim.byeolukyee.dto.user.SignInUserRequest;
@@ -95,6 +97,27 @@ public class UserService {
         return user.getSellingPosts()
                 .stream()
                 .map(SellingPostResponse::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<BuyingPostResponse> findBuyingPostsByUserId(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        return user.getBuyingPosts()
+                .stream()
+                .map(BuyingPostResponse::from)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<SellingCommentResponse> findSellingCommentsByUserId(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        return user.getSellingComments()
+                .stream()
+                .map(SellingCommentResponse::from)
                 .collect(Collectors.toList());
     }
 }

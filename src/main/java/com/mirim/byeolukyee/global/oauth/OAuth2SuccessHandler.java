@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.global.oauth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mirim.byeolukyee.global.jwt.TokenProvider;
 import com.mirim.byeolukyee.domain.token.entity.RefreshToken;
 import com.mirim.byeolukyee.domain.user.entity.User;
@@ -18,7 +19,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -49,11 +53,23 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String accessToken = tokenProvider.generateToken(user, ACCESS_TOKEN_DURATION);
         String targetUrl = getTargetUrl(accessToken);
 
+        // 응답 객체에 사용자 데이터 및 토큰 추가
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("email", user.getEmail());
+        responseBody.put("name", user.getName());
+        responseBody.put("refreshToken", refreshToken);
+        responseBody.put("accessToken", accessToken);
+
+        // JSON 형식으로 응답 작성
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(out, responseBody);
+
+
         // 인증 관련 설정값, 쿠키 제거
         clearAuthenticationAttributes(request, response);
-
-        // 리다이렉트
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 
     // 리프레시 토큰 db에 저장

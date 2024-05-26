@@ -2,7 +2,6 @@ package com.mirim.byeolukyee.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mirim.byeolukyee.global.base.BaseEntity;
-import com.mirim.byeolukyee.domain.image.entity.ProfileImage;
 import com.mirim.byeolukyee.domain.post.entity.BuyingPost;
 import com.mirim.byeolukyee.domain.post.entity.SellingComment;
 import com.mirim.byeolukyee.domain.post.entity.SellingPost;
@@ -34,9 +33,8 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String studentId;   // 학번
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_image_id", referencedColumnName = "id")
-    private ProfileImage profileImage;
+    @Column(nullable = false)
+    private String profileUrl; // 프로필 사진
 
     @Builder.Default
     @JsonIgnore

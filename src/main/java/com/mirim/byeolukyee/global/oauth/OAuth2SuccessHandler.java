@@ -55,8 +55,11 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         // 응답 객체에 사용자 데이터 및 토큰 추가
         Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("id", user.getId());
         responseBody.put("email", user.getEmail());
         responseBody.put("name", user.getName());
+        responseBody.put("studentId", user.getStudentId());
+        responseBody.put("profileUrl", user.getProfileUrl());
         responseBody.put("refreshToken", refreshToken);
         responseBody.put("accessToken", accessToken);
 

@@ -71,8 +71,22 @@ public class OAuth2UserController {
                 .bodyToMono(Map.class)
                 .block();
 
-        User user = userRepository.findByEmail((String) userInfo.get("email"))
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        System.out.println(userInfo.toString());
+        User user = null;
+
+        if (userRepository.existsUserByEmail((String) userInfo.get("email"))) {
+            user = userRepository.findByEmail((String) userInfo.get("email")).get();
+        } else {
+            User newUser = User.builder()
+                    .email((String) userInfo.get("email"))
+                    .password("password12!")
+                    .profileUrl((String) userInfo.get("picture"))
+                    .name((String) userInfo.get("given_name"))
+                    .studentId(((String) userInfo.get("family_name")).replaceAll("[^0-9]", ""))
+                    .build();
+
+            user = userRepository.save(newUser);
+        }
 
         Map<String, Object> response = new HashMap<>();
         response.put("accessToken", accessToken);

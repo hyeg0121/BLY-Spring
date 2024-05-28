@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class WishList extends BaseEntity {
+public class Wish extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,4 +23,6 @@ public class WishList extends BaseEntity {
     @ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    private boolean isLiked;    // true -> 좋아요, false -> 좋아요가 아닌 상태
 }

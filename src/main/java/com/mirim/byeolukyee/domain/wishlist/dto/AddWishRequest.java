@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddWishListRequest {
+public class AddWishRequest {
     @NotBlank(message = "유저 아이디는 공백일 수 없습니다.")
     private Long userId;
 

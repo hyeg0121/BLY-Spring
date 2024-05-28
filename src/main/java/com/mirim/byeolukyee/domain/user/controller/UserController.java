@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.domain.user.controller;
 
+import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.buyingpost.BuyingPostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingpost.SellingPostResponse;
@@ -7,6 +8,7 @@ import com.mirim.byeolukyee.domain.user.dto.AddUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.SignInUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
 import com.mirim.byeolukyee.domain.user.service.UserService;
+import com.mirim.byeolukyee.domain.wishlist.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final WishService wishService;
 
     @GetMapping
     public List<UserResponse> getAllUsers() {
@@ -66,5 +69,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findSellingCommentsByUserId(id));
     }
+//
+//    @GetMapping("{id}/wishes")
+//    public ResponseEntity<List<PostResponse>> getWishes(@PathVariable("id") Long id) {
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(userService.findWishesByUserId(id));
+//    }
 }
 

@@ -53,23 +53,13 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String accessToken = tokenProvider.generateToken(user, ACCESS_TOKEN_DURATION);
         String targetUrl = getTargetUrl(accessToken);
 
-        // 응답 객체에 사용자 데이터 및 토큰 추가
-        Map<String, Object> responseBody = new HashMap<>();
-        responseBody.put("email", user.getEmail());
-        responseBody.put("name", user.getName());
-        responseBody.put("refreshToken", refreshToken);
-        responseBody.put("accessToken", accessToken);
-
-        // JSON 형식으로 응답 작성
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(out, responseBody);
-
-
+        System.out.println("targetUrl: " + targetUrl);
+        System.out.println("refreshToken: " + refreshToken);
         // 인증 관련 설정값, 쿠키 제거
         clearAuthenticationAttributes(request, response);
+
+        // 리다이렉트
+        getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 
     // 리프레시 토큰 db에 저장

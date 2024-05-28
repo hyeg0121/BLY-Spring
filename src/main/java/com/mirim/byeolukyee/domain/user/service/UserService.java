@@ -1,8 +1,10 @@
 package com.mirim.byeolukyee.domain.user.service;
 
+import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.buyingpost.BuyingPostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingpost.SellingPostResponse;
+import com.mirim.byeolukyee.domain.post.entity.Post;
 import com.mirim.byeolukyee.domain.user.dto.AddUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.SignInUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
@@ -120,4 +122,16 @@ public class UserService {
                 .map(SellingCommentResponse::from)
                 .collect(Collectors.toList());
     }
+
+//    public List<PostResponse> findWishesByUserId(Long id) {
+//        User user = userRepository.findById(id)
+//                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+//
+//        return user.getWishes()
+//                .stream()
+//                .map(wish -> {
+//                    Post post = wish.getPost();
+//                })
+//                .collect(Collectors.toList());
+//    }
 }

@@ -1,6 +1,7 @@
 package com.mirim.byeolukyee.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mirim.byeolukyee.domain.wishlist.entity.Wish;
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.post.entity.BuyingPost;
 import com.mirim.byeolukyee.domain.post.entity.SellingComment;
@@ -50,6 +51,11 @@ public class User extends BaseEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SellingComment> sellingComments = new ArrayList<>();
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany
+    private List<Wish> wishes = new ArrayList<>();
 
     public User update(String name) {
         this.name = name;

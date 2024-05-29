@@ -1,4 +1,4 @@
-package com.mirim.byeolukyee.domain.wishlist.dto;
+package com.mirim.byeolukyee.domain.wish.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

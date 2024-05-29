@@ -1,7 +1,7 @@
 package com.mirim.byeolukyee.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mirim.byeolukyee.domain.wishlist.entity.Wish;
+import com.mirim.byeolukyee.domain.wish.entity.Wish;
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.post.entity.BuyingPost;
 import com.mirim.byeolukyee.domain.post.entity.SellingComment;

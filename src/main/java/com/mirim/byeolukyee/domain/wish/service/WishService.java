@@ -1,8 +1,8 @@
-package com.mirim.byeolukyee.domain.wishlist.service;
+package com.mirim.byeolukyee.domain.wish.service;
 
 import com.mirim.byeolukyee.domain.user.repository.UserRepository;
-import com.mirim.byeolukyee.domain.wishlist.dto.WishResponse;
-import com.mirim.byeolukyee.domain.wishlist.repository.WishRepository;
+import com.mirim.byeolukyee.domain.wish.dto.WishResponse;
+import com.mirim.byeolukyee.domain.wish.repository.WishRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package com.mirim.byeolukyee.domain.wishlist.dto;
+package com.mirim.byeolukyee.domain.wish.dto;
 
-import com.mirim.byeolukyee.domain.wishlist.entity.Wish;
+import com.mirim.byeolukyee.domain.wish.entity.Wish;
 import lombok.Getter;
 
 @Getter

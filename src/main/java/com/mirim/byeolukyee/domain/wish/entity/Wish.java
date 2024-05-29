@@ -1,4 +1,4 @@
-package com.mirim.byeolukyee.domain.wishlist.entity;
+package com.mirim.byeolukyee.domain.wish.entity;
 
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.post.entity.Post;

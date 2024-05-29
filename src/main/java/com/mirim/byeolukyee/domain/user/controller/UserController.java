@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.domain.user.controller;
 
+import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.buyingpost.BuyingPostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingpost.SellingPostResponse;
@@ -68,11 +69,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findSellingCommentsByUserId(id));
     }
-//
-//    @GetMapping("{id}/wishes")
-//    public ResponseEntity<List<PostResponse>> getWishes(@PathVariable("id") Long id) {
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(userService.findWishesByUserId(id));
-//    }
+
+    @GetMapping("/{id}/wishes")
+    public ResponseEntity<List<PostResponse>> getWishes(
+            @PathVariable("id") Long id,
+            @RequestParam(value = "type", defaultValue = "selling") String type
+    ) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.findWishesByUserId(id, type));
+    }
 }
 

@@ -54,7 +54,7 @@ public class User extends BaseEntity {
 
     @Builder.Default
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Wish> wishes = new ArrayList<>();
 
     public User update(String name) {

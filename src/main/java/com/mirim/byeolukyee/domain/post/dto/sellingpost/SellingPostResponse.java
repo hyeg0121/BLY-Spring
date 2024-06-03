@@ -19,13 +19,15 @@ public class SellingPostResponse extends PostResponse {
     private final SellingPostStatus status;
     private final String krStatus;
     private final List<ImageResponse> images;
+    private final Integer wishCount;
 
     @Builder
-    public SellingPostResponse(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponse user, String title, String description, Integer price, String location, SellingPostStatus status, List<ImageResponse> images) {
+    public SellingPostResponse(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponse user, String title, String description, Integer price, String location, SellingPostStatus status, List<ImageResponse> images, Integer wishCount) {
         super(isDeleted, createdAt, updatedAt, id, user, title, description, price, location);
         this.status = status;
         this.krStatus = status.getKrName();
         this.images = images;
+        this.wishCount = wishCount;
     }
 
     public static SellingPostResponse from(SellingPost sellingPost) {
@@ -48,6 +50,7 @@ public class SellingPostResponse extends PostResponse {
                 .location(sellingPost.getLocation())
                 .status(sellingPost.getStatus())
                 .images(postImageList)
+                .wishCount(sellingPost.getWishes().size())
                 .build();
     }
 

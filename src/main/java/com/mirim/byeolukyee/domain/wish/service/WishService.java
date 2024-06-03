@@ -14,13 +14,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class WishService {
 
     private final WishRepository wishRepository;
@@ -34,6 +36,7 @@ public class WishService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public WishResponse createWish(AddWishRequest addWishRequest) {
         User user = userRepository.findById(addWishRequest.getUserId())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
@@ -47,6 +50,7 @@ public class WishService {
         if (existingWishOpt.isPresent()) {
             wish = existingWishOpt.get();
             wish.toggleLiked();
+            System.out.println(wish.isLiked());
             wish = wishRepository.save(wish);
         } else {
             wish = wishRepository.save(
@@ -61,4 +65,16 @@ public class WishService {
         return WishResponse.from(wish);
     }
 
+    public Map<String, Boolean> hasUserLikedPost(Long userId, Long postId) {
+        Optional<Wish> existingWishOpt = wishRepository.findByUserIdAndPostId(userId, postId);
+        Map<String, Boolean> response = new HashMap<>();
+
+        if (existingWishOpt.isPresent() && existingWishOpt.get().isLiked()) {
+            response.put("isLiked", true);
+        } else {
+            response.put("isLiked", false);
+        }
+
+        return response;
+    }
 }

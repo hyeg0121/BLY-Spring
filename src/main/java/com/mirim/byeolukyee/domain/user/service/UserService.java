@@ -132,6 +132,7 @@ public class UserService {
 
         return user.getWishes()
                 .stream()
+                .filter(Wish::isLiked)
                 .map(Wish::getPost)
                 .map(PostResponse::from)
                 .collect(Collectors.toList());

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/wishes")
@@ -27,5 +28,11 @@ public class WishController {
     public ResponseEntity<WishResponse> createWish(@RequestBody AddWishRequest addWishRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(wishService.createWish(addWishRequest));
+    }
+
+    @GetMapping("/checking")
+    public ResponseEntity<Map<String, Boolean>> checkIfUserLikedPost(@RequestParam("user") Long userId, @RequestParam("post") Long postId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(wishService.hasUserLikedPost(userId, postId));
     }
 }

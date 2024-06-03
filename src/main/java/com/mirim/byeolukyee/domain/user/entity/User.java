@@ -10,7 +10,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -55,7 +57,7 @@ public class User extends BaseEntity {
     @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Wish> wishes = new ArrayList<>();
+    private Set<Wish> wishes = new HashSet<>();
 
     public User update(String name) {
         this.name = name;

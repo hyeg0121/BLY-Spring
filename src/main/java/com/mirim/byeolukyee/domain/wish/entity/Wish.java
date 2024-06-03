@@ -26,7 +26,7 @@ public class Wish extends BaseEntity {
 
     private boolean isLiked;    // true -> 좋아요, false -> 좋아요가 아닌 상태
 
-    public boolean toggleLiked() {
-        return !this.isLiked;
+    public void toggleLiked() {
+        this.isLiked = !isLiked;
     }
 }

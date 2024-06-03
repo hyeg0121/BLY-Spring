@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.domain.post.dto;
 
+import com.mirim.byeolukyee.domain.post.entity.Post;
 import com.mirim.byeolukyee.global.base.Response;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
 import lombok.*;
@@ -24,5 +25,19 @@ public class PostResponse extends Response {
         this.description = description;
         this.price = price;
         this.location = location;
+    }
+
+    public static PostResponse from(Post post) {
+        return new PostResponse(
+                post.getIsDeleted(),
+                post.getCreatedAt(),
+                post.getUpdatedAt(),
+                post.getId(),
+                UserResponse.from(post.getUser()),
+                post.getTitle(),
+                post.getDescription(),
+                post.getPrice(),
+                post.getLocation()
+        );
     }
 }

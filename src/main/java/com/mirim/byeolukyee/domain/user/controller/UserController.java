@@ -8,7 +8,7 @@ import com.mirim.byeolukyee.domain.user.dto.AddUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.SignInUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
 import com.mirim.byeolukyee.domain.user.service.UserService;
-import com.mirim.byeolukyee.domain.wishlist.service.WishService;
+import com.mirim.byeolukyee.domain.wish.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,11 +69,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findSellingCommentsByUserId(id));
     }
-//
-//    @GetMapping("{id}/wishes")
-//    public ResponseEntity<List<PostResponse>> getWishes(@PathVariable("id") Long id) {
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(userService.findWishesByUserId(id));
-//    }
+
+    @GetMapping("/{id}/wishes")
+    public ResponseEntity<List<PostResponse>> getWishes(
+            @PathVariable("id") Long id,
+            @RequestParam(value = "type", defaultValue = "selling") String type
+    ) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.findWishesByUserId(id, type));
+    }
 }
 

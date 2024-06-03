@@ -4,12 +4,15 @@ import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.buyingpost.BuyingPostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingpost.SellingPostResponse;
+import com.mirim.byeolukyee.domain.post.entity.BuyingPost;
 import com.mirim.byeolukyee.domain.post.entity.Post;
+import com.mirim.byeolukyee.domain.post.entity.SellingPost;
 import com.mirim.byeolukyee.domain.user.dto.AddUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.SignInUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
 import com.mirim.byeolukyee.domain.user.entity.User;
 import com.mirim.byeolukyee.domain.user.repository.UserRepository;
+import com.mirim.byeolukyee.domain.wish.entity.Wish;
 import com.mirim.byeolukyee.global.exception.user.DuplicateEmailException;
 import com.mirim.byeolukyee.global.exception.user.IncorrectPasswordException;
 import com.mirim.byeolukyee.global.exception.user.UserNotFoundException;
@@ -123,15 +126,14 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-//    public List<PostResponse> findWishesByUserId(Long id) {
-//        User user = userRepository.findById(id)
-//                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-//
-//        return user.getWishes()
-//                .stream()
-//                .map(wish -> {
-//                    Post post = wish.getPost();
-//                })
-//                .collect(Collectors.toList());
-//    }
+    public List<PostResponse> findWishesByUserId(Long id, String type) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        return user.getWishes()
+                .stream()
+                .map(Wish::getPost)
+                .map(PostResponse::from)
+                .collect(Collectors.toList());
+    }
 }

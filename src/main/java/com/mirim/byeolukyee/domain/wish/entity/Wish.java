@@ -1,4 +1,4 @@
-package com.mirim.byeolukyee.domain.wishlist.entity;
+package com.mirim.byeolukyee.domain.wish.entity;
 
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.post.entity.Post;
@@ -25,4 +25,8 @@ public class Wish extends BaseEntity {
     private Post post;
 
     private boolean isLiked;    // true -> 좋아요, false -> 좋아요가 아닌 상태
+
+    public boolean toggleLiked() {
+        return !this.isLiked;
+    }
 }

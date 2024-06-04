@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.domain.post.dto.sellingpost;
 
+import com.mirim.byeolukyee.domain.wish.entity.Wish;
 import com.mirim.byeolukyee.global.constant.status.SellingPostStatus;
 import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.image.dto.ImageResponse;
@@ -50,7 +51,7 @@ public class SellingPostResponse extends PostResponse {
                 .location(sellingPost.getLocation())
                 .status(sellingPost.getStatus())
                 .images(postImageList)
-                .wishCount(sellingPost.getWishes().size())
+                .wishCount(sellingPost.getWishes().stream().filter(Wish::isLiked).toList().size())
                 .build();
     }
 

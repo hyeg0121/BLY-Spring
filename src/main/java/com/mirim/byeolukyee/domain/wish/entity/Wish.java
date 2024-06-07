@@ -1,5 +1,6 @@
 package com.mirim.byeolukyee.domain.wish.entity;
 
+import com.mirim.byeolukyee.domain.post.entity.SellingPost;
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.post.entity.Post;
 import com.mirim.byeolukyee.domain.user.entity.User;
@@ -22,7 +23,7 @@ public class Wish extends BaseEntity {
 
     @ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
-    private Post post;
+    private SellingPost post;
 
     private boolean isLiked;    // true -> 좋아요, false -> 좋아요가 아닌 상태
 

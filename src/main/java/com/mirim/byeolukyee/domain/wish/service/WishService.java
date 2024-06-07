@@ -1,7 +1,9 @@
 package com.mirim.byeolukyee.domain.wish.service;
 
 import com.mirim.byeolukyee.domain.post.entity.Post;
+import com.mirim.byeolukyee.domain.post.entity.SellingPost;
 import com.mirim.byeolukyee.domain.post.repository.PostRepository;
+import com.mirim.byeolukyee.domain.post.repository.SellingPostRepository;
 import com.mirim.byeolukyee.domain.user.entity.User;
 import com.mirim.byeolukyee.domain.user.repository.UserRepository;
 import com.mirim.byeolukyee.domain.wish.dto.AddWishRequest;
@@ -28,6 +30,7 @@ public class WishService {
     private final WishRepository wishRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final SellingPostRepository sellingPostRepository;
 
     public List<WishResponse> findAll() {
         return wishRepository.findAll()
@@ -41,7 +44,7 @@ public class WishService {
         User user = userRepository.findById(addWishRequest.getUserId())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
-        Post post = postRepository.findById(addWishRequest.getPostId())
+        SellingPost post = sellingPostRepository.findById(addWishRequest.getPostId())
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         Optional<Wish> existingWishOpt = wishRepository.findByUserIdAndPostId(addWishRequest.getUserId(), addWishRequest.getPostId());

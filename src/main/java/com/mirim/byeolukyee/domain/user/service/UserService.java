@@ -126,7 +126,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public List<PostResponse> findWishesByUserId(Long id, String type) {
+    public List<SellingPostResponse> findWishesByUserId(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
@@ -134,7 +134,7 @@ public class UserService {
                 .stream()
                 .filter(Wish::isLiked)
                 .map(Wish::getPost)
-                .map(PostResponse::from)
+                .map(SellingPostResponse::from)
                 .collect(Collectors.toList());
     }
 }

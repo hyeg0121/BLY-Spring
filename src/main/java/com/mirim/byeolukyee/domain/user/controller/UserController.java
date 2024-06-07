@@ -71,12 +71,11 @@ public class UserController {
     }
 
     @GetMapping("/{id}/wishes")
-    public ResponseEntity<List<PostResponse>> getWishes(
-            @PathVariable("id") Long id,
-            @RequestParam(value = "type", defaultValue = "selling") String type
+    public ResponseEntity<List<SellingPostResponse>> getWishes(
+            @PathVariable("id") Long id
     ) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(userService.findWishesByUserId(id, type));
+                .body(userService.findWishesByUserId(id));
     }
 }
 

@@ -31,6 +31,7 @@ public class SellingCommentService {
     public List<SellingCommentResponse> findAllSellingComments() {
         List<SellingComment> sellingComments = sellingCommentRepository.findAll();
         return sellingComments.stream()
+                .filter(sellingComment -> !sellingComment.getIsDeleted())
                 .map(SellingCommentResponse::from)
                 .collect(Collectors.toList());
     }
@@ -84,6 +85,7 @@ public class SellingCommentService {
         return SellingCommentResponse.from(updatedSellingComment);
     }
 
+    @Transactional
     public void deleteSellingComment(Long id) {
         SellingComment sellingComment = sellingCommentRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);

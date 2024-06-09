@@ -28,6 +28,7 @@ public class SellingPostService {
     public List<SellingPostResponse> findAllSellingPosts() {
         List<SellingPost> sellingPosts = sellingPostRepository.findAll();
         return sellingPosts.stream()
+                .filter(sellingPost -> !sellingPost.getIsDeleted())
                 .map(SellingPostResponse::from)
                 .collect(Collectors.toList());
     }
@@ -75,6 +76,7 @@ public class SellingPostService {
         return SellingPostResponse.from(updatedSellingPost);
     }
 
+    @Transactional
     public void deleteSellingPost(Long id) {
         SellingPost sellingPost = sellingPostRepository.findById(id)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);

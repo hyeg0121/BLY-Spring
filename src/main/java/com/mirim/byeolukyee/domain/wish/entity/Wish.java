@@ -21,7 +21,7 @@ public class Wish extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = SellingPost.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private SellingPost post;
 

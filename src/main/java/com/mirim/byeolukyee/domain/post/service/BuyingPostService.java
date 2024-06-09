@@ -34,6 +34,7 @@ public class BuyingPostService {
     public List<BuyingPostResponse> findALlBuyingPosts() {
         List<BuyingPost> buyingPosts = buyingPostRepository.findAll();
         return buyingPosts.stream()
+                .filter(buyingPost -> !buyingPost.getIsDeleted())
                 .map(BuyingPostResponse::from)
                 .collect(Collectors.toList());
     }
@@ -107,6 +108,7 @@ public class BuyingPostService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void deleteBuyingPost(Long id) {
         BuyingPost buyingPost = buyingPostRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);

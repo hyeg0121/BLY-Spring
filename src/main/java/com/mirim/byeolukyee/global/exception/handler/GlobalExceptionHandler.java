@@ -1,6 +1,9 @@
 package com.mirim.byeolukyee.global.exception.handler;
 
 import com.mirim.byeolukyee.global.constant.code.ErrorCode;
+import com.mirim.byeolukyee.global.exception.chat.ChatRoomNotFoundException;
+import com.mirim.byeolukyee.global.exception.chat.DuplicateChatRoomException;
+import com.mirim.byeolukyee.global.exception.chat.MessageNotFoundException;
 import com.mirim.byeolukyee.global.exception.dto.ErrorResponse;
 import com.mirim.byeolukyee.global.exception.image.ImageNotFoundException;
 import com.mirim.byeolukyee.global.exception.post.PostNotFoundException;
@@ -47,6 +50,24 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException e) {
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+                .body(ErrorResponse.of(e.getErrorCode()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleChatRoomNotFoundException(ChatRoomNotFoundException e) {
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+                .body(ErrorResponse.of(e.getErrorCode()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleDuplicateChatRoomException(DuplicateChatRoomException e) {
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+                .body(ErrorResponse.of(e.getErrorCode()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleMessageNotFoundException(MessageNotFoundException e) {
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(ErrorResponse.of(e.getErrorCode()));
     }

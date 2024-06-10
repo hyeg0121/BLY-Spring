@@ -1,12 +1,8 @@
 package com.mirim.byeolukyee.domain.user.service;
 
-import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.buyingpost.BuyingPostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingcomment.SellingCommentResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingpost.SellingPostResponse;
-import com.mirim.byeolukyee.domain.post.entity.BuyingPost;
-import com.mirim.byeolukyee.domain.post.entity.Post;
-import com.mirim.byeolukyee.domain.post.entity.SellingPost;
 import com.mirim.byeolukyee.domain.user.dto.AddUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.SignInUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;

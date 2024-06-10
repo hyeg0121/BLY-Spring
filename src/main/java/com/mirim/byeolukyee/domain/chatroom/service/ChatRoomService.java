@@ -4,6 +4,7 @@ import com.mirim.byeolukyee.domain.chatroom.dto.AddChatRoomRequest;
 import com.mirim.byeolukyee.domain.chatroom.dto.ChatRoomResponse;
 import com.mirim.byeolukyee.domain.chatroom.entity.ChatRoom;
 import com.mirim.byeolukyee.domain.chatroom.repository.ChatRoomRepository;
+import com.mirim.byeolukyee.domain.message.dto.MessageResponse;
 import com.mirim.byeolukyee.domain.user.entity.User;
 import com.mirim.byeolukyee.domain.user.repository.UserRepository;
 import com.mirim.byeolukyee.global.exception.chat.ChatRoomNotFoundException;
@@ -72,6 +73,16 @@ public class ChatRoomService {
 
         return chatRooms.stream()
                 .map(ChatRoomResponse::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<MessageResponse> findChatRoomMessages(Long id) {
+        ChatRoom chatRoom = chatRoomRepository.findById(id)
+                .orElseThrow(() -> ChatRoomNotFoundException.EXCEPTION);
+
+        return chatRoom.getMessages()
+                .stream()
+                .map(MessageResponse::from)
                 .collect(Collectors.toList());
     }
 }

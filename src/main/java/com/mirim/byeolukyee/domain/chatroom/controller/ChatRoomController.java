@@ -3,6 +3,7 @@ package com.mirim.byeolukyee.domain.chatroom.controller;
 import com.mirim.byeolukyee.domain.chatroom.dto.AddChatRoomRequest;
 import com.mirim.byeolukyee.domain.chatroom.dto.ChatRoomResponse;
 import com.mirim.byeolukyee.domain.chatroom.service.ChatRoomService;
+import com.mirim.byeolukyee.domain.message.dto.MessageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,11 @@ public class ChatRoomController {
     public ResponseEntity<ChatRoomResponse> createChatRoom(@RequestBody AddChatRoomRequest addChatRoomRequest) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(chatRoomService.createChatRoom(addChatRoomRequest));
+    }
+
+    @GetMapping("/{id}/messages")
+    public ResponseEntity<List<MessageResponse>> getChatRoomMessages(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(chatRoomService.findChatRoomMessages(id));
     }
 }

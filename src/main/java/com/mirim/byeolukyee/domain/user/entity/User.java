@@ -60,10 +60,13 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Wish> wishes = new HashSet<>();
 
-
+    @Builder.Default
+    @JsonIgnore
     @OneToMany(mappedBy = "user1", fetch = FetchType.LAZY)
     private List<ChatRoom> chatRoomsAsUser1 = new ArrayList<>();
 
+    @Builder.Default
+    @JsonIgnore
     @OneToMany(mappedBy = "user2", fetch = FetchType.LAZY)
     private List<ChatRoom> chatRoomsAsUser2 = new ArrayList<>();
 

@@ -47,7 +47,7 @@ public class ChatRoomService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
         boolean chatRoomExists = chatRoomRepository.findByUser1AndUser2(user1, user2).isPresent() ||
-                chatRoomRepository.findByUser2AndUser1(user2, user1).isPresent();
+                chatRoomRepository.findByUser2AndUser1(user1, user2).isPresent();
 
         if (chatRoomExists) {
             throw DuplicateChatRoomException.EXCEPTION;
@@ -61,5 +61,17 @@ public class ChatRoomService {
         );
 
         return ChatRoomResponse.from(createdChatRoom);
+    }
+
+    public List<ChatRoomResponse> findChatRoomsByUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        List<ChatRoom> chatRooms = user.getChatRoomsAsUser1();
+        chatRooms.addAll(user.getChatRoomsAsUser2());
+
+        return chatRooms.stream()
+                .map(ChatRoomResponse::from)
+                .collect(Collectors.toList());
     }
 }

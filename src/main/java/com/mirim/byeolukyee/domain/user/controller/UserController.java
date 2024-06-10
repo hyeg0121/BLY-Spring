@@ -1,5 +1,7 @@
 package com.mirim.byeolukyee.domain.user.controller;
 
+import com.mirim.byeolukyee.domain.chatroom.dto.ChatRoomResponse;
+import com.mirim.byeolukyee.domain.chatroom.service.ChatRoomService;
 import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.buyingpost.BuyingPostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingcomment.SellingCommentResponse;
@@ -22,6 +24,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final WishService wishService;
+    private final ChatRoomService chatRoomService;
 
     @GetMapping
     public List<UserResponse> getAllUsers() {
@@ -76,6 +79,12 @@ public class UserController {
     ) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findWishesByUserId(id));
+    }
+
+    @GetMapping("/{id}/chatrooms")
+    public ResponseEntity<List<ChatRoomResponse>> getUserChatRooms(@PathVariable("id") Long userId) {
+        List<ChatRoomResponse> chatRooms = chatRoomService.findChatRoomsByUser(userId);
+        return ResponseEntity.ok(chatRooms);
     }
 }
 

@@ -24,7 +24,7 @@ public class ChatRoomController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ChatRoomResponse> getChatRoomById(@PathVariable Long id) {
+    public ResponseEntity<ChatRoomResponse> getChatRoomById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(chatRoomService.findChatRoomById(id));
     }

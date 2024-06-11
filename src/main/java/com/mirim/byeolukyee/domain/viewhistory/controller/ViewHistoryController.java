@@ -1,7 +1,8 @@
 package com.mirim.byeolukyee.domain.viewhistory.controller;
 
 import com.mirim.byeolukyee.domain.viewhistory.dto.CreateViewHistoryRequest;
-import com.mirim.byeolukyee.domain.viewhistory.dto.ViewHistoryResponse;
+import com.mirim.byeolukyee.domain.viewhistory.dto.ViewHistoryWithBuyingPostResponse;
+import com.mirim.byeolukyee.domain.viewhistory.dto.ViewHistoryWithSellingPostResponse;
 import com.mirim.byeolukyee.domain.viewhistory.service.ViewHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,26 +18,28 @@ public class ViewHistoryController {
 
     private final ViewHistoryService viewHistoryService;
 
+    @PostMapping
+    public ResponseEntity<Object> createViewHistory(@RequestBody CreateViewHistoryRequest request, @RequestParam("type") String type) {
+        if(type.equals("selling")){
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(viewHistoryService.createSellingViewHistory(request));
+        }else{
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(viewHistoryService.createBuyingViewHistory(request));
+        }
+
+    }
+
+
     @GetMapping
-    public ResponseEntity<List<ViewHistoryResponse>> getAllViewHistory() {
+    public ResponseEntity<List<ViewHistoryWithBuyingPostResponse>> getAllViewHistory() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(viewHistoryService.findAllViewHistory());
     }
 
-    @PostMapping
-    public ResponseEntity<ViewHistoryResponse> createViewHistory(@RequestBody CreateViewHistoryRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(viewHistoryService.createViewHistory(request));
-    }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<ViewHistoryResponse>> getViewHistoriesByUser(@PathVariable("userId") Long userId) {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(viewHistoryService.findViewHistoriesByUser(userId));
-    }
-
-    @GetMapping("/post/{postId}")
-    public ResponseEntity<List<ViewHistoryResponse>> getViewHistoriesByPost(@PathVariable("postId") Long postId) {
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<ViewHistoryWithBuyingPostResponse>> getViewHistoriesByPost(@PathVariable("postId") Long postId) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(viewHistoryService.findViewHistoriesByPost(postId));
     }

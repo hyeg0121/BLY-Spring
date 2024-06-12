@@ -1,7 +1,6 @@
 package com.mirim.byeolukyee.domain.viewhistory.dto;
 
 
-import com.mirim.byeolukyee.domain.post.dto.PostResponse;
 import com.mirim.byeolukyee.domain.post.dto.sellingpost.SellingPostResponse;
 import com.mirim.byeolukyee.domain.post.entity.SellingPost;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
@@ -27,14 +26,14 @@ public class ViewHistoryWithSellingPostResponse extends Response {
     }
 
 
-    public static ViewHistoryWithSellingPostResponse from(ViewHistory viewHistory) {
+    public static ViewHistoryWithSellingPostResponse from(ViewHistory viewHistory, SellingPost sellingPost) {
         return ViewHistoryWithSellingPostResponse.builder()
                 .isDeleted(viewHistory.getIsDeleted())
                 .createdAt(viewHistory.getCreatedAt())
                 .updatedAt(viewHistory.getUpdatedAt())
                 .id(viewHistory.getId())
                 .user(UserResponse.from(viewHistory.getUser()))
-                .post(SellingPostResponse.from((SellingPost) viewHistory.getPost()))
+                .post(SellingPostResponse.from(sellingPost))
                 .build();
     }
 }

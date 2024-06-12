@@ -26,14 +26,15 @@ public class ViewHistoryWithBuyingPostResponse extends Response {
     }
 
 
-    public static ViewHistoryWithBuyingPostResponse from(ViewHistory viewHistory) {
+    public static ViewHistoryWithBuyingPostResponse from(ViewHistory viewHistory, BuyingPost buyingPost) {
+
         return ViewHistoryWithBuyingPostResponse.builder()
                 .isDeleted(viewHistory.getIsDeleted())
                 .createdAt(viewHistory.getCreatedAt())
                 .updatedAt(viewHistory.getUpdatedAt())
                 .id(viewHistory.getId())
                 .user(UserResponse.from(viewHistory.getUser()))
-                .post(BuyingPostResponse.from((BuyingPost) viewHistory.getPost()))
+                .post(BuyingPostResponse.from(buyingPost))
                 .build();
     }
 }

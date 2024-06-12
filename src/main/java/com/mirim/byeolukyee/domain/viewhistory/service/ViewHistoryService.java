@@ -18,6 +18,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.View;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +31,21 @@ public class ViewHistoryService {
     private final SellingPostRepository sellingPostRepository;
     private final BuyingPostRepository buyingPostRepository;
 
-    public List<ViewHistoryWithBuyingPostResponse> findAllViewHistory() {
-        List<ViewHistory> viewHistories = viewHistoryRepository.findAll();
-        return viewHistories.stream()
-                .map(ViewHistoryWithBuyingPostResponse::from)
+    public List<ViewHistoryWithBuyingPostResponse> findAllViewHistoryWithBuyingPosts() {
+
+        return viewHistoryRepository.findAll()
+                .stream()
+                .filter(viewHistory -> isBuyingPostHistory(viewHistory.getPost().getId()))
+                .map(this::createResponseWithBuyingPosts)
+                .collect(Collectors.toList());
+    }
+
+    public List<ViewHistoryWithSellingPostResponse> findAllViewHistoryWithSellingPosts() {
+
+        return viewHistoryRepository.findAll()
+                .stream()
+                .filter(viewHistory -> isSellingPostHistory(viewHistory.getPost().getId()))
+                .map(this::createResponseWithSellingPosts)
                 .collect(Collectors.toList());
     }
 
@@ -49,7 +61,7 @@ public class ViewHistoryService {
                     .build();
 
             ViewHistory savedViewHistory = viewHistoryRepository.save(viewHistory);
-            return ViewHistoryWithBuyingPostResponse.from(savedViewHistory);
+            return ViewHistoryWithBuyingPostResponse.from(savedViewHistory, buyingPost);
 
     }
 
@@ -67,7 +79,7 @@ public class ViewHistoryService {
                     .build();
             ViewHistory savedViewHistory = viewHistoryRepository.save(viewHistory);
 
-            return ViewHistoryWithSellingPostResponse.from(savedViewHistory);
+            return ViewHistoryWithSellingPostResponse.from(savedViewHistory, sellingPost);
 
     }
 
@@ -76,9 +88,9 @@ public class ViewHistoryService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
             return viewHistoryRepository.findByUser(user).stream()
-                    .map(ViewHistoryWithSellingPostResponse::from)
+                    .filter(viewHistory -> isSellingPostHistory(viewHistory.getPost().getId()))
+                    .map(this::createResponseWithSellingPosts)
                     .collect(Collectors.toList());
-
     }
 
     public List<ViewHistoryWithBuyingPostResponse> findViewBuyingHistoriesByUser(Long userId) {
@@ -86,17 +98,38 @@ public class ViewHistoryService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
             return viewHistoryRepository.findByUser(user).stream()
-                    .map(ViewHistoryWithBuyingPostResponse::from)
+                    .filter(viewHistory -> isBuyingPostHistory(viewHistory.getPost().getId()))
+                    .map(this::createResponseWithBuyingPosts)
                     .collect(Collectors.toList());
 
     }
 
-    public List<ViewHistoryWithBuyingPostResponse> findViewHistoriesByPost(Long postId) {
-        Post post = sellingPostRepository.findById(postId)
+    public ViewHistoryWithBuyingPostResponse createResponseWithBuyingPosts(ViewHistory viewHistory) {
+        BuyingPost buyingPost = buyingPostRepository.findById(viewHistory.getPost().getId())
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
-        return viewHistoryRepository.findByPost(post).stream()
-                .map(ViewHistoryWithBuyingPostResponse::from)
-                .collect(Collectors.toList());
+
+        return ViewHistoryWithBuyingPostResponse.from(viewHistory, buyingPost);
+    }
+
+    public ViewHistoryWithSellingPostResponse createResponseWithSellingPosts(ViewHistory viewHistory) {
+        SellingPost sellingPost = sellingPostRepository.findById(viewHistory.getPost().getId())
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+
+        return ViewHistoryWithSellingPostResponse.from(viewHistory, sellingPost);
+    }
+
+    public boolean isBuyingPostHistory(Long postId) {
+        BuyingPost buyingPost = buyingPostRepository.findById(postId)
+                .orElse(null);
+
+        return buyingPost != null;
+    }
+
+    public boolean isSellingPostHistory(Long postId) {
+        SellingPost sellingPost = sellingPostRepository.findById(postId)
+                .orElse(null);
+
+        return sellingPost != null;
     }
 
 }

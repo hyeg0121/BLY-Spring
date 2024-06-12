@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/view-history")
+@RequestMapping("/view-histories")
 @RequiredArgsConstructor
 public class ViewHistoryController {
 
     private final ViewHistoryService viewHistoryService;
 
     @PostMapping
-    public ResponseEntity<Object> createViewHistory(@RequestBody CreateViewHistoryRequest request, @RequestParam("type") String type) {
+    public ResponseEntity<Object> createViewHistory(
+            @RequestBody CreateViewHistoryRequest request,
+            @RequestParam("type") String type
+    ) {
         if(type.equals("selling")){
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(viewHistoryService.createSellingViewHistory(request));
@@ -32,16 +35,16 @@ public class ViewHistoryController {
 
 
     @GetMapping
-    public ResponseEntity<List<ViewHistoryWithBuyingPostResponse>> getAllViewHistory() {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(viewHistoryService.findAllViewHistory());
-    }
-
-
-    @GetMapping("/{postId}")
-    public ResponseEntity<List<ViewHistoryWithBuyingPostResponse>> getViewHistoriesByPost(@PathVariable("postId") Long postId) {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(viewHistoryService.findViewHistoriesByPost(postId));
+    public ResponseEntity<Object> getAllViewHistory(
+            @RequestParam("type") String type
+    ) {
+        if (type.equals("selling")) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(viewHistoryService.findAllViewHistoryWithSellingPosts());
+        } else {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(viewHistoryService.findAllViewHistoryWithBuyingPosts());
+        }
     }
 
 }

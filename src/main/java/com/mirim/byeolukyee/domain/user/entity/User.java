@@ -2,6 +2,7 @@ package com.mirim.byeolukyee.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mirim.byeolukyee.domain.chatroom.entity.ChatRoom;
+import com.mirim.byeolukyee.domain.viewhistory.entity.ViewHistory;
 import com.mirim.byeolukyee.domain.wish.entity.Wish;
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.post.entity.BuyingPost;
@@ -69,6 +70,11 @@ public class User extends BaseEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "user2", fetch = FetchType.LAZY)
     private List<ChatRoom> chatRoomsAsUser2 = new ArrayList<>();
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<ViewHistory> viewHistories = new ArrayList<>();
 
     public User update(String name) {
         this.name = name;

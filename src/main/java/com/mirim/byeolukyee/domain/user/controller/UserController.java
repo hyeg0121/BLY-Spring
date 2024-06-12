@@ -10,6 +10,7 @@ import com.mirim.byeolukyee.domain.user.dto.AddUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.SignInUserRequest;
 import com.mirim.byeolukyee.domain.user.dto.UserResponse;
 import com.mirim.byeolukyee.domain.user.service.UserService;
+import com.mirim.byeolukyee.domain.viewhistory.service.ViewHistoryService;
 import com.mirim.byeolukyee.domain.wish.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class UserController {
     private final UserService userService;
     private final WishService wishService;
     private final ChatRoomService chatRoomService;
+    private final ViewHistoryService viewHistoryService;
 
     @GetMapping
     public List<UserResponse> getAllUsers() {
@@ -82,9 +84,23 @@ public class UserController {
     }
 
     @GetMapping("/{id}/chatrooms")
-    public ResponseEntity<List<ChatRoomResponse>> getUserChatRooms(@PathVariable("id") Long userId) {
-        List<ChatRoomResponse> chatRooms = chatRoomService.findChatRoomsByUser(userId);
-        return ResponseEntity.ok(chatRooms);
+    public ResponseEntity<List<ChatRoomResponse>> getUserChatRooms(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(chatRoomService.findChatRoomsByUser(id));
+    }
+
+    @GetMapping("/{id}/view-histories")
+    public ResponseEntity<Object> getUserViewHistory(@PathVariable("id") Long id, @RequestParam("type") String type){
+
+        if(type.equals("selling")){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(viewHistoryService.findViewSellingHistoriesByUser(id));
+
+        }else{
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(viewHistoryService.findViewBuyingHistoriesByUser(id));
+        }
+
     }
 }
 

@@ -23,5 +23,7 @@ public class ViewHistory extends BaseEntity {
     @ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
+
+
 }
 

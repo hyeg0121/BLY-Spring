@@ -1,10 +1,15 @@
 package com.mirim.byeolukyee.domain.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mirim.byeolukyee.domain.viewhistory.entity.ViewHistory;
 import com.mirim.byeolukyee.global.base.BaseEntity;
 import com.mirim.byeolukyee.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -34,6 +39,11 @@ public class Post extends BaseEntity {
     @Builder.Default
     @Column(nullable = false)
     private String location = "거래 희망 장소가 없습니다.";
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<ViewHistory> views = new ArrayList<>();
 
     protected void updatePost(String title, String description, Integer price, String location) {
         this.title = title;

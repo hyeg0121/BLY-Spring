@@ -13,12 +13,14 @@ import java.time.LocalDateTime;
 public class BuyingPostResponse extends PostResponse {
     private final BuyingPostStatus status;
     private final String krStatus;
+    private final Integer views;
 
     @Builder
-    public BuyingPostResponse(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponse user, String title, String description, Integer price, String location, BuyingPostStatus status) {
+    public BuyingPostResponse(Boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, UserResponse user, String title, String description, Integer price, String location, BuyingPostStatus status, Integer views) {
         super(isDeleted, createdAt, updatedAt, id, user, title, description, price, location);
         this.status = status;
         this.krStatus = status.getKrName();
+        this.views = views;
     }
     
     public static BuyingPostResponse from(BuyingPost buyingPost) {
@@ -33,6 +35,7 @@ public class BuyingPostResponse extends PostResponse {
                 .price(buyingPost.getPrice())
                 .location(buyingPost.getLocation())
                 .status(buyingPost.getStatus())
+                .views(buyingPost.getViews().size())
                 .build();
     }
 }
